@@ -15,4 +15,8 @@ class Recipe < ActiveRecord::Base
 
   has_many :reviews, inverse_of: :recipe, dependent: :destroy
   has_many :reviewers, through: :reviews, source: :user
+
+  def score
+    reviews.average(:score)
+  end
 end

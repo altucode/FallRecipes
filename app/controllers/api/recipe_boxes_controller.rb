@@ -2,11 +2,11 @@ class Api::RecipeBoxesController < ApplicationController
   before_action :require_current_user!
 
   def index
-    render json: current_user.recipe_boxes
+    @recipe_boxes = current_user.recipe_boxes
   end
 
   def show
-    render json: RecipeBox.find(params[:id])
+    @recipe_box = RecipeBox.find(params[:id])
   end
 
   def create
@@ -21,6 +21,6 @@ class Api::RecipeBoxesController < ApplicationController
 
   private
   def recipe_box_params
-    params.require(:recipe_box).permit(:name, recipe_cards: [])
+    params.require(:recipe_box).permit(:name)
   end
 end
