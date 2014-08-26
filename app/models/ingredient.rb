@@ -4,12 +4,14 @@ class Ingredient < ActiveRecord::Base
 
   belongs_to :recipe, inverse_of: :ingredients
 
-  def unit_type
-    @unit_type ||= 'whole'
+  belongs_to :usda, class_name: "USDAIngredient", foreign_key: :usda_id, primary_key: :id
+
+  def name=(name)
+    @usda_id = USDAIngredient.find_by_name(name).id;
   end
 
-  def type=(type)
-    @usda_id = 0;
+  def nutrition_info
+    ratio = self.usda.nf_serving
   end
 
 end
