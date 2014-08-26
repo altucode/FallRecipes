@@ -11,7 +11,6 @@ class Ingredient < ActiveRecord::Base
   end
 
   def nutrition_info
-    ratio = self.usda.nf_serving
   end
 
 end
