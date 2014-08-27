@@ -12,8 +12,8 @@ class Api::FavoritesController < ApplicationController
   end
 
   def destroy
-    @favorite = Favorites.where(recipe_id: params[:recipe_id], user_id: current_user.id).first
-    @favorite.destroy
+    @favorite = current_user.favorites.find(params[:id])
+    @favorite.try(:destroy)
     render json: {}
   end
 

@@ -1,5 +1,5 @@
 class Api::FollowsController < ApplicationController
-  before_action :require_current_user!, only: [:create, :destroy]
+  before_action :require_current_user!
 
   def create
     @follow = current_user.followings.create(follow_params)
@@ -11,7 +11,9 @@ class Api::FollowsController < ApplicationController
   end
 
   def destroy
-
+    @follow = current_user.followings.find(params[:id])
+    @follow.try(:destroy)
+    render json: {}
   end
 
   private

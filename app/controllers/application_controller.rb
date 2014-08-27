@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
     redirect_to new_session_url if current_user.nil?
   end
 
+  def require_recipe_author!
+    redirect_to root if current_user.id != current_recipe.user_id
+  end
+
   def logout
     current_user.try(:reset_session_token)
     session[:session_token] = nil

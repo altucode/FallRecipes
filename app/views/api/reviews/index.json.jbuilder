@@ -1,10 +1,8 @@
 json.reviews @reviews do |review|
-  json.id review.id
-  json.author review.user do
-    json.id review.user.id
-    json.username review.user.username
+  json.extract! review, :id, :score, :body, :user_id, :created_at, :updated_at
+  if (current_user.id == review.user_id)
+    json.editable true
   end
-  json.avatar_url review.user.avatar_url
-  json.score review.score
-  json.body review.body
+  json.username review.user.username
+  json.avatar_url asset_path(review.user.avatar.url)
 end

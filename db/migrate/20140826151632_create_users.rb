@@ -6,9 +6,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name, null: false
       t.string :email, null: false
 
-      t.text :about
+      t.attachment :avatar
 
-      t.string :avatar_url
+      t.text :about
 
       t.string :password_digest, null: false
 

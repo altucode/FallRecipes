@@ -1,7 +1,4 @@
 json.recipes @recipes do |recipe|
-  json.id recipe.id
-  json.name recipe.name
-  json.image_url recipe.image_url
-  json.desc recipe.desc
-  json.score recipe.score
+  json.extract! :id, :name, :pre_time, :cook_time, :servings, :desc, :score, :created_at, :updated_at
+  json.image asset_path(recipe.image.url)
 end

@@ -10,12 +10,13 @@ class Api::ReviewsController < ApplicationController
   end
 
   def create
-    @review = current_user.reviews.create(review_params)
+    @review = current_recipe.reviews.create(review_params)
+    @review.user_id = current_user.id
 
     if @review.save
       render json: @review
     else
-      render json: @review.errors.full_messages
+      render json: @review.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -25,8 +26,26 @@ class Api::ReviewsController < ApplicationController
     render json: {}
   end
 
+  def update
+    @review = current_user.reviews.find(params[:id])
+
+    if @user.update_attributes(review_params)
+      render json: @review
+    else
+      render json: @review.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   private
+  def current_recipe
+    if params[:id]
+      @review = Reviews.find(params[:id])
+      @recipe = @review.recipe
+    else
+      @recipe = Recipe.find(params[:recipe][:recipe_id])
+    end
+  end
   def review_params
-    params.require(:review).permit(:score, :text)
+    params.require(:review).permit(:score, :body)
   end
 end

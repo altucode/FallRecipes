@@ -1,9 +1,7 @@
 class User < ActiveRecord::Base
-  validates :username, presence: true, length: { minimum: 2 }
-  validates :first_name, :last_name, :email, presence: true
-  validates :password, length: { minimum: 6, allow_nil: true }
-  validates :password_digest, presence: true
   after_initialize :ensure_session_token
+
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>", icon: "50x50>" }, default_url: "/images/:style/default_avatar.png"
 
   has_many :recipes, inverse_of: :user
 
@@ -58,4 +56,10 @@ class User < ActiveRecord::Base
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
   end
+
+  validates :username, presence: true, length: { minimum: 2 }
+  validates :first_name, :last_name, :email, presence: true
+  validates :password, length: { minimum: 6, allow_nil: true }
+  validates :password_digest, presence: true
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 end

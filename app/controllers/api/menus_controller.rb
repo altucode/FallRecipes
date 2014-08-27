@@ -1,8 +1,8 @@
 class Api::MenusController < ApplicationController
-  before_action :require_current_user!
+  before_action :require_current_user!, except: [:show]
 
   def show
-
+    @menu = Menu.find(params[:id])
   end
 
   def create
@@ -15,8 +15,24 @@ class Api::MenusController < ApplicationController
     end
   end
 
+  def destroy
+    @menu = current_user.menus.find(params[:id])
+    @menu.try(:destroy)
+    render json: {}
+  end
+
+  def update
+    @menu = current_user.menus.find(params[:id])
+
+    if @menu.update_attributes(menu_params)
+      render json: @menu
+    else
+      render json: @menu.errors.full_messages
+    end
+  end
+
   private
   def menu_params
-    params.require(:menu).permit(:name, recipes: [])
+    params.require(:menu).permit(:name)
   end
 end

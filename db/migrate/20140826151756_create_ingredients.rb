@@ -3,8 +3,8 @@ class CreateIngredients < ActiveRecord::Migration
     create_table :ingredients do |t|
       t.integer :recipe_id
       t.integer :usda_id
-      t.float :units
-      t.string :unit_type
+      t.string :unit
+      t.float :unit_qty
     end
     add_index :ingredients, [:recipe_id, :usda_id], unique: true
   end

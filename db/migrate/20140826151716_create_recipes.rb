@@ -3,10 +3,11 @@ class CreateRecipes < ActiveRecord::Migration
     create_table :recipes do |t|
       t.integer :user_id, null: false
       t.string :name, null: false
-      t.string :image_url
       t.time :prep_time, null: false
       t.time :cook_time, null: false
       t.integer :servings, null: false
+
+      t.attachment :image
 
       t.text :desc
 

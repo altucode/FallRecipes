@@ -10,11 +10,12 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      render json: @user
+    redirect_to root_url if params[:id] != current_user.id
+
+    if current_user.update_attributes(user_params)
+      render json: current_user
     else
-      render json: @user.errors.full_messages, status: :unprocessable_entity
+      render json: current_user.errors.full_messages, status: :unprocessable_entity
     end
   end
 
