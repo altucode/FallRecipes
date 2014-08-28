@@ -8,3 +8,10 @@ window.FallRecipes = {
     Backbone.history.start();
   }
 };
+
+
+FallRecipes.View = Backbone.View.extend({
+  className: function() {
+    return this.editable;
+  }
+});
