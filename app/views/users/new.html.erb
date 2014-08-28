@@ -1,0 +1,31 @@
+<% if flash[:errors] %>
+  <%= flash[:errors] %>
+<% end %>
+
+<form action="<%= users_url %>" method="POST">
+  <input
+    name="authenticity_token"
+    type="hidden"
+    value="<%= form_authenticity_token %>">
+  <label>
+    Username
+    <input name="user[username]" value="<%= @user.username %>">
+  </label>
+  <label>
+    Password
+    <input name="user[password]" type="password">
+  </label>
+  <label>
+    First Name
+    <input name="user[first_name]" value="<%= @user.first_name %>">
+  </label>
+  <label>
+    Last Name
+    <input name="user[last_name]" value="<%= @user.last_name %>">
+  </label>
+  <label>
+    Email
+    <input name="user[email]" value="<%= @user.email %>">
+  </label>
+  <button>Register</button>
+</form>

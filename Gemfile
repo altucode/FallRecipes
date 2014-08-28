@@ -16,6 +16,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'addressable'
 gem 'rest-client'
+gem 'aws-sdk'
 
 gem 'figaro'
 

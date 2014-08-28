@@ -15,6 +15,6 @@ class CreateUsdaIngredients < ActiveRecord::Migration
       t.float :nf_dietary_fiber
     end
 
-    add_index :usda_ingredients, :name, unique: true
+    add_index :usda_ingredients, :item_name, unique: true
   end
 end

@@ -21,26 +21,26 @@ class User < ActiveRecord::Base
   has_many :reviews, inverse_of: :user
   has_many :reviewed_recipes, through: :reviews, source: :recipe
 
-
+  attr_reader :password
 
   def password=(password)
     @password = password;
-    @password_digest = BCrypt::Password.create(password)
+    self.password_digest = BCrypt::Password.create(password)
   end
 
   def is_password?(password)
-    BCrypt::Password.new(@password_digest).is_password?(password)
+    BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
   def reset_session_token!
-    @session_token = generate_session_token until find_by_session_token(@session_token).empty?
+    self.session_token = User.generate_session_token while !!User.find_by(session_token: self.session_token)
     self.save
 
-    @session_token
+    self.session_token
   end
 
   def ensure_session_token
-    @session_token ||= generate_session_token
+    self.session_token ||= User.generate_session_token
   end
 
   def latest_recipes(limit)

@@ -7,13 +7,17 @@ class SessionsController < ApplicationController
     user = User.find_by_credentials(params[:user][:username], params[:user][:password])
 
     if user.nil?
-      render json: "Credentials were wrong"
+      flash.now[:error] = "Credentials were wrong"
+      render :new
     else
       login!(user)
+      redirect_to root_url
     end
   end
 
   def destroy
     logout!
+    flash[:notice] = "Successfully logged out"
+    redirect_to root_url
   end
 end
