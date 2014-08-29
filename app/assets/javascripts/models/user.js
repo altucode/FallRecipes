@@ -1,7 +1,7 @@
 FallRecipes.Models.User = Backbone.Model.extend({
   name: 'user',
   parse: function (response) {
-    if (response.recipes){
+    if (response.recipes) {
       this.recipes().set(response.recipes);
       delete response.recipes;
     }

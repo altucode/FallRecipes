@@ -1,4 +1,4 @@
-FallRecipes.Views.Ingredient = Backbone.View.extends({
+FallRecipes.Views.Ingredient = Backbone.View.extend({
   template: JST['ingredient_view'],
   events: {
     'blur .editable .input': 'updateIngredient',
