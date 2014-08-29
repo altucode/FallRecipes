@@ -1,4 +1,5 @@
 class Recipe < ActiveRecord::Base
+  include Notifiable
 
   has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>"}, default_url: "missing_avatar.png"
 

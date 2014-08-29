@@ -11,26 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826200657) do
+ActiveRecord::Schema.define(version: 20140829161523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "favorites", force: true do |t|
-    t.integer  "recipe_id",  null: false
-    t.integer  "user_id",    null: false
-    t.datetime "created_at"
-  end
-
-  add_index "favorites", ["user_id", "recipe_id"], name: "index_favorites_on_user_id_and_recipe_id", unique: true, using: :btree
-
-  create_table "follows", force: true do |t|
-    t.integer  "user_id",     null: false
-    t.integer  "follower_id", null: false
-    t.datetime "created_at"
-  end
-
-  add_index "follows", ["follower_id", "user_id"], name: "index_follows_on_follower_id_and_user_id", unique: true, using: :btree
 
   create_table "ingredients", force: true do |t|
     t.integer "recipe_id"
@@ -57,6 +41,20 @@ ActiveRecord::Schema.define(version: 20140826200657) do
   end
 
   add_index "menus", ["user_id"], name: "index_menus_on_user_id", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.integer  "subscriber_id"
+    t.string   "subscriber_type"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.integer  "event_id"
+    t.boolean  "is_read"
+    t.datetime "created_at"
+  end
+
+  add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree
+  add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type", using: :btree
+  add_index "notifications", ["subscriber_id", "subscriber_type"], name: "index_notifications_on_subscriber_id_and_subscriber_type", using: :btree
 
   create_table "recipe_boxes", force: true do |t|
     t.integer  "user_id"
@@ -111,6 +109,17 @@ ActiveRecord::Schema.define(version: 20140826200657) do
   end
 
   add_index "reviews", ["recipe_id", "user_id"], name: "index_reviews_on_recipe_id_and_user_id", unique: true, using: :btree
+
+  create_table "subscriptions", force: true do |t|
+    t.integer  "notifiable_id",   null: false
+    t.string   "notifiable_type", null: false
+    t.integer  "subscriber_id",   null: false
+    t.string   "subscriber_type", null: false
+    t.datetime "created_at"
+  end
+
+  add_index "subscriptions", ["notifiable_id", "notifiable_type"], name: "index_subscriptions_on_notifiable_id_and_notifiable_type", using: :btree
+  add_index "subscriptions", ["subscriber_id", "subscriber_type"], name: "index_subscriptions_on_subscriber_id_and_subscriber_type", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer "recipe_id"

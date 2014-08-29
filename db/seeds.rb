@@ -22,3 +22,11 @@ step1_2 = RecipeStep.create(recipe: recipe1, ord: 2, text: "set burner to 300 de
 step1_3 = RecipeStep.create(recipe: recipe1, ord: 3, text: "wait until water starts to bubble")
 
 review1 = Review.create(recipe: recipe1, user: user2, body: "10/10 would send to olympics", score: 10)
+
+recipe_box1 = RecipeBox.create(name: "How To", user: user2, recipes: [recipe1])
+
+menu1 = Menu.create(name: "SampleMenu", user: user2, recipes: [recipe1])
+
+follow1 = Subscription.create(notifiable: user1, subscriber: user2)
+
+favorite1 = Subscription.create(notifiable: recipe1, subscriber: user2)

@@ -4,6 +4,6 @@ class RecipeBox < ActiveRecord::Base
   has_many :recipe_cards, inverse_of: :recipe_box, dependent: :destroy
   has_many :recipes, through: :recipe_cards, source: :recipe
 
-  validates :user, :recipe, presence: true
+  validates :user, presence: true
   validates :name, presence: true, length: { minimum: 2 }
 end

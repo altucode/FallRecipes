@@ -12,8 +12,8 @@ Rails.application.routes.draw do
     resources :recipe_boxes, only: [:create, :destroy, :update]
     resources :menus, only: [:create, :destroy, :update]
     resources :reviews, only: [:create, :destroy, :update]
-    resources :favorites, only: [:create, :destroy]
-    resources :follows, only: [:create, :destroy]
+    resources :subscriptions, only: [:create, :destroy]
+    resources :notifications, only: [:create, :destroy]
   end
 
   resource :static_pages, only: [:root]

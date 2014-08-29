@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  include Notifiable
+  include Subscriber
+
   after_initialize :ensure_session_token
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>", icon: "50x50>" }, default_url: "missing_avatar.png"
@@ -9,14 +12,11 @@ class User < ActiveRecord::Base
 
   has_many :menus, inverse_of: :user, dependent: :destroy
 
-  has_many :followings, class_name: "Follow", foreign_key: :follower_id, primary_key: :id, dependent: :destroy
-  has_many :followed_users, through: :followings, source: :user
+  has_many :followed_users, through: :subscriptions, source_type: "User"
 
-  has_many :follows, class_name: "Follow", foreign_key: :user_id, primary_key: :id, dependent: :destroy
-  has_many :followers, through: :follows, source: :follower
+  has_many :followers, through: :subs, source_type: "User"
 
-  has_many :favorites, inverse_of: :user, dependent: :destroy
-  has_many :favorite_recipes, through: :favorites, source: :recipe
+  has_many :favorites, through: :subs, source_type: "Recipe"
 
   has_many :reviews, inverse_of: :user
   has_many :reviewed_recipes, through: :reviews, source: :recipe
