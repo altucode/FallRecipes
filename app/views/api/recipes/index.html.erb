@@ -1,0 +1,12 @@
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li>
+      <img src="<%= asset_path('thumb/default_avatar.png') %>">
+      <a href="<%= api_recipe_url(recipe) %>">
+        <%= recipe.name %>
+      </a>
+      Score: <%= recipe.score %>
+      <p><%= recipe.desc %></p>
+    </li>
+  <% end %>
+</ul>

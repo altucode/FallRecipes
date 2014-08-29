@@ -63,7 +63,7 @@
   <ul>
     <% @recipe.reviews.each do |review| %>
       <li>
-        <img src="<%= review.user.avatar.url %>"></img>
+        <img src="<%= asset_path(review.user.avatar.url(:thumb)) %>"></img>
         <a href="<%= api_user_url(review.user) %>">
           <%= review.user.username %>
         </a>

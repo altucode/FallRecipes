@@ -7,6 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav class="site-navbar">
+    <a class="home" href="<%= root_url %>">
+      FallRecipes
+    </a>
+    <ul>
+      <li><a href="<%= api_recipes_url %>">Recipes</a></li>
+    </ul>
+  </nav>
   <% if user_logged_in? %>
     <ul>
       <li><%= current_user.username %></li>

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>", icon: "50x50>" }, default_url: "/images/:style/default_avatar.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>", icon: "50x50>" }, default_url: "missing_avatar.png"
 
   has_many :recipes, inverse_of: :user
 
