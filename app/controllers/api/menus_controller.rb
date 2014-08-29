@@ -8,7 +8,8 @@ class Api::MenusController < ApplicationController
   def create
     @menu = current_user.menus.create(menu_params)
 
-    if @menu.save
+    if @menu.valid?
+      current_user.notify(Menu.CREATED, @menu)
       render json: @menu
     else
       render json: @menu.errors.full_messages
@@ -25,6 +26,7 @@ class Api::MenusController < ApplicationController
     @menu = current_user.menus.find(params[:id])
 
     if @menu.update_attributes(menu_params)
+      @menu.notify(Menu.UPDATED)
       render json: @menu
     else
       render json: @menu.errors.full_messages

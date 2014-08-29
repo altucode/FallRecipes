@@ -27,6 +27,6 @@ recipe_box1 = RecipeBox.create(name: "How To", user: user2, recipes: [recipe1])
 
 menu1 = Menu.create(name: "SampleMenu", user: user2, recipes: [recipe1])
 
-follow1 = Subscription.create(notifiable: user1, subscriber: user2)
+follow1 = Subscription.create(subscribable: user1, subscriber: user2)
 
-favorite1 = Subscription.create(notifiable: recipe1, subscriber: user2)
+favorite1 = Subscription.create(subscribable: recipe1, subscriber: user2)

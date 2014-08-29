@@ -1,5 +1,15 @@
+<style>
+img.photo {
+  float: left;
+  margin: 0 10px 0 0;
+}
+div.summary-box {
+  padding: 10px 0px;
+}
+</style>
+
 <div class="summary-box">
-  <img class="image"></img>
+  <img class="photo" src="<%= asset_path(@recipe.image.url(:medium)) %>"></img>
   <h1><%= @recipe.name %></h1>
   Score: <%= @recipe.score %>
   <meter class="score" value="<%= @recipe.score %>"></meter>

@@ -1,0 +1,47 @@
+<style>
+img.avatar {
+  float: left;
+  height: 100px;
+  width: 100px;
+}
+img.thumb {
+  height: 50px;
+  width: 50px;
+}
+div.info-box {
+  height: 100px;
+}
+</style>
+
+<div class="info-box">
+  <img class="avatar" src="<%= asset_path(@user.avatar.url) %>"></img>
+  <h1><%= @user.username %></h1>
+</div>
+<div class="about-box">
+  <h2>About Me</h2>
+  <p><%= @user.about %></p>
+</div>
+<div class="recipe-box">
+  <h2>My Recipes</h2>
+  <ul>
+    <% @user.recipes.each do |recipe| %>
+      <li>
+        <img class="thumb" src="<%= asset_path(recipe.image.url) %>"></img>
+        <a href="<%= api_recipe_url(recipe.id) %>">
+          <%= recipe.name %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<div class="follower-box">
+  <h2>Followers</h2>
+  <ul>
+    <% @user.followers.each do |follower| %>
+      <li>
+        <img class="thumb" src="<%= asset_path(follower.avatar.url) %>"></img>
+        <a href="<%= api_user_url(follower.id) %>"><%= follower.username %></a>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,12 +1,10 @@
 class Recipe < ActiveRecord::Base
   include Notifiable
+  include Subscribable
 
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>"}, default_url: "missing_avatar.png"
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>"}, default_url: "missing_photo.png"
 
   belongs_to :user, inverse_of: :recipes
-
-  has_many :favorites, inverse_of: :recipe, dependent: :destroy
-  has_many :favorited_users, through: :favorites, source: :user
 
   has_many :recipe_cards, inverse_of: :recipe, dependent: :destroy
   has_many :recipe_boxes, through: :recipe_cards, source: :recipe_box
@@ -33,6 +31,17 @@ class Recipe < ActiveRecord::Base
       i.nutrition_info.each do |key, val|
         o[key] = o[key] ? o[key] + val : val
       end
+    end
+  end
+
+  def event_string(event_id)
+    case event_id
+    when CREATED
+      "#{self.user.username} posted a new recipe: #{self.recipe.name}"
+    when UPDATED
+      "#{self.name} was updated by #{self.user.username}"
+    else
+      Notifiable.event_string(event_id)
     end
   end
 

@@ -43,11 +43,11 @@ ActiveRecord::Schema.define(version: 20140829161523) do
   add_index "menus", ["user_id"], name: "index_menus_on_user_id", using: :btree
 
   create_table "notifications", force: true do |t|
-    t.integer  "subscriber_id"
-    t.string   "subscriber_type"
-    t.integer  "notifiable_id"
-    t.string   "notifiable_type"
-    t.integer  "event_id"
+    t.integer  "subscriber_id",   null: false
+    t.string   "subscriber_type", null: false
+    t.integer  "notifiable_id",   null: false
+    t.string   "notifiable_type", null: false
+    t.integer  "event_id",        null: false
     t.boolean  "is_read"
     t.datetime "created_at"
   end
@@ -111,14 +111,14 @@ ActiveRecord::Schema.define(version: 20140829161523) do
   add_index "reviews", ["recipe_id", "user_id"], name: "index_reviews_on_recipe_id_and_user_id", unique: true, using: :btree
 
   create_table "subscriptions", force: true do |t|
-    t.integer  "notifiable_id",   null: false
-    t.string   "notifiable_type", null: false
-    t.integer  "subscriber_id",   null: false
-    t.string   "subscriber_type", null: false
+    t.integer  "subscribable_id",   null: false
+    t.string   "subscribable_type", null: false
+    t.integer  "subscriber_id",     null: false
+    t.string   "subscriber_type",   null: false
     t.datetime "created_at"
   end
 
-  add_index "subscriptions", ["notifiable_id", "notifiable_type"], name: "index_subscriptions_on_notifiable_id_and_notifiable_type", using: :btree
+  add_index "subscriptions", ["subscribable_id", "subscribable_type"], name: "index_subscriptions_on_subscribable_id_and_subscribable_type", using: :btree
   add_index "subscriptions", ["subscriber_id", "subscriber_type"], name: "index_subscriptions_on_subscriber_id_and_subscriber_type", using: :btree
 
   create_table "taggings", force: true do |t|

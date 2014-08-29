@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  include Notifiable
+  include Subscribable
   include Subscriber
 
   after_initialize :ensure_session_token
@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
 
   has_many :menus, inverse_of: :user, dependent: :destroy
 
-  has_many :followed_users, through: :subscriptions, source_type: "User"
+  has_many :followers, through: :subs, source: :subscriber, source_type: "User"
 
-  has_many :followers, through: :subs, source_type: "User"
+  has_many :follows, through: :subscriptions, source: :subscribable, source_type: "User"
 
-  has_many :favorites, through: :subs, source_type: "Recipe"
+  has_many :favorites, through: :subscriptions, source: :subscribable, source_type: "Recipe"
 
   has_many :reviews, inverse_of: :user
   has_many :reviewed_recipes, through: :reviews, source: :recipe
