@@ -32,8 +32,9 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
   },
   updateItem: function (event) {
     var item = this.collection.get($(event.target).attr('data-id'));
-    var key = $(event.target).attr('name');
-    item.set({ (key): $(event.target).val() });
+    var hash = {};
+    hash[$(event.target).attr('name')] = $(event.target).val();
+    item.set(hash);
   },
 
 
