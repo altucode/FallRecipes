@@ -1,7 +1,7 @@
 FallRecipes.Routers.Router = Backbone.Router.extend({
   routes: {
-    '': 'root',
-    
+    '': 'root'
+
   },
 
   _swapView: function(view) {
