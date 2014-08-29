@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 20140826200657) do
   create_table "recipes", force: true do |t|
     t.integer  "user_id",            null: false
     t.string   "name",               null: false
-    t.time     "prep_time",          null: false
-    t.time     "cook_time",          null: false
+    t.integer  "prep_time",          null: false
+    t.integer  "cook_time",          null: false
     t.integer  "servings",           null: false
     t.string   "image_file_name"
     t.string   "image_content_type"

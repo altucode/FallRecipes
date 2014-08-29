@@ -1,10 +1,27 @@
 <div class="backdrop">
 </div>
 
-<nav class="navbar">
+<nav class="site-navbar">
+
 </nav>
 
-<div id="content">
+<nav class="user-navbar">
+  <% if user_logged_in? %>
+    <ul class="personal">
+      <li>
+        <a href="<%= api_user_recipe_boxes(current_user) %>">Recipe Boxes</a>
+      </li>
+      <li>
+        <a href="">Shopping List</a>
+      </li>
+      <li>
+        <a href="<%= api_user_menus(current_user) %>">Menus</a>
+      </li>
+    </ul>
+  <% end %>
+</nav>
+
+<div>
 
 </div>
 

@@ -3,7 +3,7 @@ class Tagging < ActiveRecord::Base
   belongs_to :tag, inverse_of: :taggings
 
   def name=(name)
-    @tag_id = Tag.find_or_create_by_name(name).id
+    self.tag_id = Tag.find_or_create_by_name(name).id
   end
 
   def name

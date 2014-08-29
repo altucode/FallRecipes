@@ -1,0 +1,75 @@
+<div class="summary-box">
+  <img class="image"></img>
+  <h1><%= @recipe.name %></h1>
+  Score: <%= @recipe.score %>
+  <meter class="score" value="<%= @recipe.score %>"></meter>
+  <br>
+  Recipe by
+  <a href="<%= api_user_url(@recipe.user) %>">
+    <%= @recipe.user.username %>
+  </a>
+  <p><%= @recipe.desc %></p>
+</div>
+<menu class="recipe-menu">
+  <menuitem>
+    <button>Recipe Box</button>
+  </menuitem>
+  <menuitem>
+    <button>Shopping List</button>
+  </menuitem>
+  <menuitem>
+    <button>Menu</button>
+  </menuitem>
+  <menuitem>
+    <button>Email</button>
+  </menuitem>
+  <menuitem>
+    <button>Print</button>
+  </menuitem>
+</menu>
+<div class="ingredient-box">
+  <h2>Ingredients</h2>
+  <ul>
+    <% @recipe.ingredients.each do |ing| %>
+      <li>
+        <%= ing.unit_qty %> <%= ing.unit %> <%= ing.name %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<div class="instruction-box">
+  <h2>Instructions</h2>
+  <ul>
+    <% @recipe.recipe_steps.each_with_index do |step, i| %>
+      <li>
+        <h3><%= i %></h3>
+        <%= step.text %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<div class="nutrition-box">
+  <h2>Nutrition Information</h2>
+  <ul>
+    <% @recipe.nutrition_info.each do |key, val| %>
+      <li>
+        <%= key %>: <%= val %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<div class="review-box">
+  <h2>Reviews</h2>
+  <ul>
+    <% @recipe.reviews.each do |review| %>
+      <li>
+        <img src="<%= review.user.avatar.url %>"></img>
+        <a href="<%= api_user_url(review.user) %>">
+          <%= review.user.username %>
+        </a>
+        Score: <%= review.score %>
+        <p><%= review.body %></p>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -2,10 +2,10 @@ class Api::ReviewsController < ApplicationController
   before_action :require_current_user!, only: [:create]
 
   def index
-    unless params[:recipe_id].nil?
+    if !params[:recipe_id].nil?
       @reviews = Recipe.find(params[:recipe_id]).reviews
-    else unless params[:user_id].nil?
-      @reviews = User.find(params[:user_id]).reviews
+    else
+      @reviews = Review.all
     end
   end
 

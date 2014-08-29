@@ -2,13 +2,7 @@ class Api::RecipesController < ApplicationController
   before_action :require_current_user!, except: [:index, :show]
 
   def index
-    unless params[:user_id].nil?
-      @recipes = User.find(:user_id).recipes
-    else unless params[:recipe_box_id].nil?
-      @recipes = RecipeBox.find(params[:recipe_box_id]).recipes
-    else unless params[:menu_id].nil?
-      @recipes = Menu.find(params[:menu_id]).recipes
-    end
+    @recipes = Recipe.all
   end
 
   def search
@@ -17,6 +11,7 @@ class Api::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    render :show
   end
 
   def create

@@ -1,6 +1,10 @@
 class Api::RecipeBoxesController < ApplicationController
   before_action :require_current_user!, except: [:show]
 
+  def index
+    @recipe_boxes = User.find(params[:user_id]).recipes
+  end
+
   def show
     @recipe_box = RecipeBox.find(params[:id])
   end

@@ -6,7 +6,13 @@
     name="authenticity_token"
     type="hidden"
     value="<%= form_authenticity_token %>">
-  <input name="user[username]">
-  <input name="user[password]" type="password">
-  <button>Submit</button>
+  <label>
+    Username
+    <input name="user[username]">
+  </label>
+  <label>
+    Password
+    <input name="user[password]" type="password">
+  </label>
+  <button>Log In</button>
 </form>

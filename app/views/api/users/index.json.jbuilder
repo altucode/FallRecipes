@@ -1,4 +1,4 @@
 json.users @users do |user|
-  json.extract :id, :name
+  json.extract! user, :id, :username
   json.avatar asset_path(user.avatar.url)
 end
