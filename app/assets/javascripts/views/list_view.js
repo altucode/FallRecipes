@@ -19,11 +19,11 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
     var content = this.template({ model: this.model, collection: this.collection });
     this.$el.html(content);
     var list = this;
-    this.collection.forEach(function(model)) {
+    this.collection.forEach(function(model) {
       var subview = new this.itemView({ model: model });
       list.subviews().push(subview);
       list.$el.append(subview.render().$el);
-    }
+    });
 
     return this;
   },

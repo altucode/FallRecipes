@@ -16,30 +16,30 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
   },
   render: function () {
 
-  },
-  addIngredient: function (event) {
-    var formData = $(event.target).serializeJSON();
-    formData.recipe_id = this.model.id;
-    this.model.ingredients().create(formData);
-  },
-  removeIngredient: function (event) {
-    this.model.ingredients().get($(event.target).attr('data-id')).destroy();
-  },
-  updateIngredient: function (event) {
-    var ingredient = this.model.ingredients().get($(event.target).attr('data-id'));
-    ingredient.set({ $(event.target).attr('name'): $(event.target).val() });
-  },
-  addRecipeStep: function (event) {
-    var formData = $(event.target).serializeJSON();
-    formData.recipe_id = this.model.id;
-    this.mode.steps().create(formData);
-  },
-  removeRecipeStep: function (event) {
-    this.mode.steps().get($(event.target).attr('data-id')).destroy();
-  },
-  updateRecipeStep: function (event) {
-    var ingredient = this.model.ingredients().get($(event.target).attr('data-id'));
-    ingredient.set({ $(event.target).attr('name'): $(event.target).val() });
-  }
+  }// ,
+//   addIngredient: function (event) {
+//     var formData = $(event.target).serializeJSON();
+//     formData.recipe_id = this.model.id;
+//     this.model.ingredients().create(formData);
+//   },
+//   removeIngredient: function (event) {
+//     this.model.ingredients().get($(event.target).attr('data-id')).destroy();
+//   },
+//   updateIngredient: function (event) {
+//     var ingredient = this.model.ingredients().get($(event.target).attr('data-id'));
+//     ingredient.set({ $(event.target).attr('name'): $(event.target).val() });
+//   },
+//   addRecipeStep: function (event) {
+//     var formData = $(event.target).serializeJSON();
+//     formData.recipe_id = this.model.id;
+//     this.mode.steps().create(formData);
+//   },
+//   removeRecipeStep: function (event) {
+//     this.mode.steps().get($(event.target).attr('data-id')).destroy();
+//   },
+//   updateRecipeStep: function (event) {
+//     var ingredient = this.model.ingredients().get($(event.target).attr('data-id'));
+//     ingredient.set({ $(event.target).attr('name'): $(event.target).val() });
+//   }
 
 });
