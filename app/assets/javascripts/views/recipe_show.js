@@ -18,6 +18,8 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
     var content = this.template({ recipe: this.model });
     this.$el.html(content);
 
+
+
     return this;
   }// ,
 //   addIngredient: function (event) {
