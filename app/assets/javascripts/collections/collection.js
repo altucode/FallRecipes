@@ -1,5 +1,9 @@
 FallRecipes.Collection = Backbone.Collection.extend({
 
+  initialize: function (models, options) {
+    this.url = options.url;
+  },
+
   getOrFetch: function (id) {
     var collection = this;
     var model;

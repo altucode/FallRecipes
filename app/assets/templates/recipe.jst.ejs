@@ -1,15 +1,29 @@
 <div class="summary-box">
-  <img class="image"></img>
-  <h1><%= recipe.name %></h1>
-  <meter class="score" value="<%= recipe.score %>">
-  <p><%= recipe.desc %></p>
+  <img class="image" src="<%= recipe.escape('image') %>"></img>
+  <h1><%= recipe.escape('name').toTitleCase() %></h1>
+  <meter class="score" value="<%= recipe.escape('score') %>"></meter>
+  Recipe by
+  <a href="#users/<%= recipe.author ? recipe.author.id : null %>">
+    <%= recipe.author ? recipe.author.name : null %>
+  </a>
+  <p><%= recipe.escape('desc') %></p>
 </div>
 <menu class="recipe-menu">
-  <menuitem>Recipe Box</menuitem>
-  <menuitem>Shopping List</menuitem>
-  <menuitem>Menu</menuitem>
-  <menuitem>Email</menuitem>
-  <menuitem>Print</menuitem>
+  <menuitem>
+    <button>Recipe Box</button>
+  </menuitem>
+  <menuitem>
+    <button>Shopping List</button>
+  </menuitem>
+  <menuitem>
+    <button>Menu</button>
+  </menuitem>
+  <menuitem>
+    <button>Email</button>
+  </menuitem>
+  <menuitem>
+    <button>Print</button>
+  </menuitem>
 </menu>
 <div class="ingredient-box">
 

@@ -27,6 +27,9 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
 
     return this;
   },
+  addItem: function (event) {
+    this.collection.add(new this.collection.model());
+  },
   removeItem: function (event) {
     this.collection.get($(event.target).attr('data-id')).destroy();
   },
@@ -36,6 +39,7 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
     hash[$(event.target).attr('name')] = $(event.target).val();
     item.set(hash);
   },
+
 
 
 

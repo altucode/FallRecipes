@@ -1,5 +1,8 @@
 FallRecipes.Views.RecipeShow = Backbone.View.extend({
   template: JST["recipe"],
+  className: function() {
+    return this.model.get('editable') ? 'editable' : '';
+  },
   events: {
     "submit .editable .ingredient-form": "addIngredient",
     "click .editable .ingredient .remove": "removeIngredient",
@@ -10,12 +13,12 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
   },
   initialize: function () {
     this.listenTo(this.model, "add remove change", this.render);
-    if (this.get('editable')) {
-      this.$el.addClass('editable');
-    }
   },
   render: function () {
+    var content = this.template({ recipe: this.model });
+    this.$el.html(content);
 
+    return this;
   }// ,
 //   addIngredient: function (event) {
 //     var formData = $(event.target).serializeJSON();

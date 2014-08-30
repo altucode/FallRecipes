@@ -1,5 +1,6 @@
 FallRecipes.Models.User = Backbone.Model.extend({
   name: 'user',
+  urlRoot: 'api/users',
   parse: function (response) {
     if (response.recipes) {
       this.recipes().set(response.recipes);
@@ -26,14 +27,14 @@ FallRecipes.Models.User = Backbone.Model.extend({
     return this._favorites ||
       (this._favorites = new FallRecipes.Collection({}, {
         model: Backbone.Model,
-        url: 'api/favorites'
+        url: 'api/subscriptions'
       }));
   },
   follows: function() {
     return this._follows ||
       (this._follows = new FallRecipes.Collection({}, {
         model: Backbone.Model,
-        url: 'api/follows'
+        url: 'api/subscriptions'
       }));
   }
 });

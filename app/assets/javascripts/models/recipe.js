@@ -1,6 +1,11 @@
 FallRecipes.Models.Recipe = Backbone.Model.extend({
   name: 'recipe',
+  urlRoot: 'api/recipes',
   parse: function (response) {
+    if (response.author) {
+      this.author = response.author;
+      delete response.author;
+    }
     if (response.ingredients){
       this.ingredients().set(response.ingredients, { parse: true });
       delete response.ingredients;
