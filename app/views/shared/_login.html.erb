@@ -41,6 +41,7 @@
 <script>
 $(document).ready(function() {
   $('body').on('click', '.prompt-login', function (event) {
+    event.preventDefault();
     $('.window.login').toggleClass('hidden');
   });
   $('form.login').on('submit', function(event) {
