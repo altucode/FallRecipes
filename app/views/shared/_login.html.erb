@@ -1,0 +1,68 @@
+<div class="window login">
+  <menu class="toolbar">
+    <menuitem>
+      <button class="close-window">&#10005</button>
+    </menuitem>
+  </menu>
+  <div class="content">
+    <img class="logo" src="<%= asset_path('logo.png') %>"/>
+
+    <form class="login" action="" method="POST">
+      <label class="errors"></label>
+      <input
+        name="authenticity_token"
+        type="hidden"
+        value="<%= form_authenticity_token %>">
+      <input
+        class="hidden"
+        type="text"
+        name="prevent_autofill"
+        id="prevent_autofill"
+        value=""/>
+      <input
+        class="hidden"
+        type="password"
+        name="password_fake"
+        id="password_fake"
+        value=""/>
+      <input
+        name="user[username]"
+        placeholder="Username"/>
+      <input
+        name="user[password]"
+        type="password"
+        placeholder="Password"/>
+      <button>Log In</button>
+      <p>New user? <a href="<%= new_user_url %>">Join for free!</a></p>
+    </form>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('body').on('click', '.prompt-login', function (event) {
+    $('.window.login').toggleClass('hidden');
+  });
+  $('form.login').on('submit', function(event) {
+    event.preventDefault();
+    var form = $(this);
+    $.ajax({
+      type: 'POST',
+      url: "<%= session_url %>",
+      data: $(this).serialize(),
+      success: location.reload.bind(location),
+      error: function(xhr) {
+        console.log("error");
+        var errors = $.parseJSON(xhr.responseText).errors;
+        form.children(".errors").html(errors);
+      }
+    });
+  });
+  $('body').on('click', '.close-window', function(event) {
+    $(event.target).parents('.window').toggleClass('hidden');
+  });
+});
+
+</script>
+
+

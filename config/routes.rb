@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resource :static_pages, only: [:root]
 
-  resource :session, only: [:new, :create, :destroy]
+  resource :session, only: [:create, :destroy]
 
   resources :users, only: [:new, :create]
 end

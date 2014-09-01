@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<svg width="768" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+ <g>
+  <title>Layer 1</title>
+  <image id="svg_1" xlink:href="image.png" height="138" width="454" y="159.000015" x="159.999985"/>
+  <ellipse id="svg_2" stroke-width="0" stroke="#FF5555" fill="#bf222e" ry="39" rx="35" cy="206.666718" cx="451.666565"/>
+  <path id="svg_10" stroke-width="0" d="m551.665833,452.777496c4.445007,6.665009 8.888,12.776001 13.335022,19.445007" stroke="#FF5555" fill="#bf222e"/>
+  <path id="svg_11" stroke-width="0" d="m525.554749,447.777344c24.444946,20.554993 48.888,40.554993 73.334961,61.112" stroke="#FF5555" fill="#bf222e"/>
+  <path id="svg_13" stroke-width="0" d="m457.41861,285.259155l-6.303986,-117.184982l-6.311005,117.184982l12.61499,0" stroke="#FF5555" fill="#000000"/>
+  <path id="svg_16" stroke-width="0" d="m448.054718,235.417557l-29.165009,-13.75l28.610016,16.526001l0.554993,-2.776001" stroke="#FF5555" fill="#000000"/>
+  <path id="svg_17" stroke-width="0" d="m454,229.5l32,-15.5l-34,13l2,2.5" stroke="#FF5555" fill="#000000"/>
+  <path id="svg_18" stroke-width="0" d="m449.084381,217.486496l-30.084991,-21.985001l29.529999,24.761002l0.554993,-2.776001" stroke="#FF5555" fill="#000000"/>
+  <path id="svg_19" stroke-width="0" d="m432.625,206.625l-8.125,-23.125l10.625,24.625l-2.5,-1.5" stroke="#FF5555" fill="#000000"/>
+  <path id="svg_20" stroke-width="0" d="m452.5,204.75l26.5,-23.25l-28.5,20.75l2,2.5" stroke="#FF5555" fill="#000000"/>
+  <path id="svg_21" stroke-width="0" d="m463.75,193.5l19.75,-2l-17.75,0.5l-2,1.5" stroke="#FF5555" fill="#000000"/>
+  <path id="svg_22" stroke-width="0" d="m450.501251,191.501251l-8.815002,-22.815002l9.315002,19.815002l-0.5,3" stroke="#FF5555" fill="#000000"/>
+  <ellipse id="svg_24" stroke-width="0" stroke="#FF5555" fill="#ffffff" ry="3.75" rx="3.272727" cy="273.000031" cx="450.999839"/>
+ </g>
+</svg>

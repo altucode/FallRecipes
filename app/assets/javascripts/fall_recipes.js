@@ -5,7 +5,9 @@ window.FallRecipes = {
   Routers: {},
   initialize: function() {
     new FallRecipes.Routers.Router();
-    Backbone.history.start();
+    if (!Backbone.History.started) {
+      Backbone.history.start();
+    }
   }
 };
 

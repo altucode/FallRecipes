@@ -1,0 +1,64 @@
+<nav class="usernav">
+  <menu>
+    <menuitem>
+      <a
+        class="<%= user_logged_in? ? '' : 'prompt-login' %>"
+        href="#recipe_boxes"
+        >
+        Recipe Boxes
+      </a>
+    </menuitem>
+    <menuitem>
+      <a
+        class="<%= user_logged_in? ? '' : 'prompt-login' %>"
+        href=""
+        >
+        Shopping Lists
+      </a>
+    </menuitem>
+    <menuitem>
+      <a
+        class="<%= user_logged_in? ? '' : 'prompt-login' %>"
+        href="#menus"
+        >
+        Menus
+      </a>
+    </menuitem>
+  </menu>
+
+  <menu class="right">
+    <% if user_logged_in? %>
+      <menuitem>
+        <a class="button" href="#notifications">Notifications</a>
+        <menu id="a1" type="popup">
+          <% current_user.pending_notifications.each do |notification| %>
+            <menuitem data-id="<%= notification.id %>">
+              <%= notification.event_string %>
+            </menuitem>
+          <% end %>
+        </menu>
+      </menuitem>
+      <menuitem>
+        <a href="#users/<%= current_user.id %>"><%= current_user.username %></a>
+      </menuitem>
+      <menuitem>
+        <form action="<%= session_url %>" method="POST">
+          <input
+            name="authenticity_token"
+            type="hidden"
+            value="<%= form_authenticity_token %>"
+          >
+          <input
+            name="_method"
+            type="hidden"
+            value="DELETE">
+          <button>Log Out</button>
+        </form>
+      </menuitem>
+    <% else %>
+      <menuitem>
+        <a class="prompt-login" href="<%= root_url %>">Log In</a>
+      </menuitem>
+    <% end %>
+  </menu>
+</nav>

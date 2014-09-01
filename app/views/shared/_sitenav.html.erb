@@ -1,0 +1,23 @@
+<nav class="sitenav">
+  <a class="home" href="<%= root_url %>">
+    <img class="logo" src="<%= asset_path('logo.png') %>">
+  </a>
+  <menu>
+    <menuitem>
+      <form class="search">
+        <input class="search-box"></input>
+        <button class="search">&#9906</button>
+      </form>
+    </menuitem>
+    <menuitem>
+      <a href="<%= api_recipes_url %>">
+        Recipes
+      </a>
+    </menuitem>
+    <menuitem>
+      <a href="<%= api_recipes_url %>">
+        Videos
+      </a>
+    </menuitem>
+  </menu>
+</nav>
