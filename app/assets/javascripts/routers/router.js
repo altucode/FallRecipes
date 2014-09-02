@@ -38,6 +38,7 @@ FallRecipes.Routers.Router = Backbone.Router.extend({
 
   _swapView: function (view) {
     this._currentView && this._currentView.remove();
+    console.log("call");
     $("#content").html(view.render().$el);
     this._currentView = view;
   }

@@ -1,7 +1,7 @@
 FallRecipes.Views.RecipeShow = Backbone.View.extend({
   template: JST["recipe"],
   className: function() {
-    return this.model.get('editable') ? 'editable' : '';
+    return 'recipe' + (this.model.get('editable') ? 'editable' : '');
   },
   events: {
     "submit .editable .ingredient-form": "addIngredient",
@@ -17,11 +17,28 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
   render: function () {
     var content = this.template({ recipe: this.model });
     this.$el.html(content);
-
-
+    this.$el.children('.ingredient-box').append(this.ingredientView().render().$el);
+    this.$el.children('.instruction-box').append(this.instructionView().render().$el);
 
     return this;
-  }// ,
+  },
+  ingredientView: function() {
+    return this._ingredientView ||
+      (this._ingredientView = new FallRecipes.Views.ListView({
+        itemView: FallRecipes.Views.Ingredient,
+        collection: this.model.ingredients()
+      }));
+  },
+  instructionView: function() {
+    return this._instructionView ||
+      (this._instructionView = new FallRecipes.Views.ListView({
+        itemView: FallRecipes.Views.Ingredient,
+        collection: this.model.steps()
+      }));
+  }
+
+
+  // ,
 //   addIngredient: function (event) {
 //     var formData = $(event.target).serializeJSON();
 //     formData.recipe_id = this.model.id;

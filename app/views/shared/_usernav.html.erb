@@ -28,21 +28,27 @@
 
   <menu class="right">
     <% if user_logged_in? %>
-      <menuitem>
-        <a class="button" href="#notifications">Notifications</a>
-        <menu id="a1" type="popup">
+      <menuitem class="dropdown">
+        <a href="#notifications">Notifications</a>
+        <menu class="dropdown hidden">
           <% current_user.pending_notifications.each do |notification| %>
             <menuitem data-id="<%= notification.id %>">
               <%= notification.event_string %>
             </menuitem>
           <% end %>
+          <menuitem>
+            Test1
+          </menuitem>
+          <menuitem>
+            Test2
+          </menuitem>
         </menu>
       </menuitem>
       <menuitem>
         <a href="#users/<%= current_user.id %>"><%= current_user.username %></a>
       </menuitem>
       <menuitem>
-        <form action="<%= session_url %>" method="POST">
+        <form class="wrapper" action="<%= session_url %>" method="POST">
           <input
             name="authenticity_token"
             type="hidden"
@@ -52,7 +58,7 @@
             name="_method"
             type="hidden"
             value="DELETE">
-          <button>Log Out</button>
+          <button class="link">Log Out</button>
         </form>
       </menuitem>
     <% else %>

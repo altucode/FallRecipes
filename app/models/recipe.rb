@@ -19,6 +19,7 @@ class Recipe < ActiveRecord::Base
   has_many :tags, through: :taggings, source: :tag
 
   has_many :ingredients, inverse_of: :recipe, dependent: :destroy
+  has_many :ingredient_types, through: :ingredients, source: :usda
 
   has_many :recipe_steps, inverse_of: :recipe, dependent: :destroy
 

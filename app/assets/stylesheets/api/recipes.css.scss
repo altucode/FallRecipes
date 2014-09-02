@@ -1,3 +1,33 @@
 // Place all the styles related to the api/recipes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+menu.recipe-menu {
+  display: block;
+  margin: auto;
+  font-size: 30px;
+  width: 500px;
+}
+
+.recipe > .summary-box {
+  padding: 20px;
+  border: 1px solid transparent;
+}
+
+.recipe > .summary-box > .image-frame {
+  float: left;
+  height: 200px;
+  padding: 10px 20px;
+}
+
+.recipe > .summary-box > .image-frame > img {
+  border: 2px solid black;
+}
+
+.recipe > .summary-box > .recipe-info {
+}
+
+.recipe > .summary-box > .recipe-info > meter {
+  width: 200px;
+}

@@ -57,17 +57,22 @@ body {
   color: red;
 }
 
-a {
+a, button.link {
+  background: none;
   display: inline-block;
   color: $link-color;
   text-decoration: none;
+  padding: 0;
+  margin: 0;
 }
 
-a:hover {
+a:hover, button.link:hover {
   color: $link-color-hover;
+  background: none;
+  cursor: pointer;
 }
 
-a.button, button, menuitem > a {
+a.button, button {
   background: $button-background;
   color: $button-color;
   border: none;
@@ -75,7 +80,7 @@ a.button, button, menuitem > a {
   font-size: 18px;
 }
 
-a.button:hover, button:hover, menuitem > a:hover {
+a.button:hover, button:hover {
   background: $button-background-hover;
 }
 
@@ -135,7 +140,7 @@ div.modal-container {
 
 div.modal-layer {
   position:absolute;
-  top: -2px;
+  bottom: -2px;
   left: 0;
   right: 0;
   z-index: 9999;
@@ -146,8 +151,35 @@ div.modal-layer {
 div.modal-layer > .window {
   position: relative;
   left: -250px;
-  margin: 200px 0 20% 50%;
+  margin: 100% 0 200px 50%;
   width: 500px;
+}
+
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown > menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  background: $body-background;
+  font-size: 12px;
+}
+
+.dropdown > menu > hr {
+  margin: 0px 10px;
+}
+
+.dropdown:hover > menu {
+  display: block;
+  padding: 1px;
+}
+
+.dropdown > menu > menuitem {
+  margin: 1px;
+  background: $menu-background;
 }
 
 nav.sitenav {
@@ -161,19 +193,23 @@ nav.sitenav > menu {
 nav.sitenav menuitem {
   display: inline-block;
   height: 100%;
-  padding: 10px 0;
+  padding: 10px 20px;
 }
 
 nav.sitenav menuitem > a {
   display: inline-block;
   background: none;
-  width: 90px;
   color: $h-color;
   text-align: bottom;
   vertical-align: bottom;
 }
 
 nav.sitenav menu a:after {
+  position: relative;
+  display: inline-block;
+  width: 2px;
+  top: 2px;
+  font-size: 20px;
   content: '›';
   color: $button-background-hover;
 }
@@ -198,8 +234,25 @@ nav.sitenav form.search {
   width: 100%;
 }
 
-nav > menu, menu menu {
+nav.usernav form {
   display: inline-block;
+}
+
+nav > menu, menu menu, menu > menuitem {
+  display: inline-block;
+}
+
+nav.usernav menuitem {
+  padding: 10px 20px;
+}
+
+nav.usernav a, nav.usernav button.link {
+  font-size: 16px;
+  color: $button-color;
+}
+
+nav.usernav a:hover, nav.usernav button.link:hover {
+  color: $button-background-hover;
 }
 
 .right {

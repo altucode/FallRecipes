@@ -4,23 +4,24 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
     'blur .editable .input': 'updateItem',
     'click .editable .delete': 'deleteItem'
   },
-  initialize: function () {
+  initialize: function (options) {
+    this.itemView = options.itemView || FallRecipes.Views.ListItemView;
     this.listenTo(this.collection, "add change remove", this.render);
   },
 
   remove: function() {
-    this.subview().forEach(function(subview) {
+    Backbone.View.prototype.remove.call(this);
+    this.subviews().forEach(function(subview) {
       subview.remove();
     });
-    BackBone.View.prototype.remove.call(this);
   },
 
   render: function() {
-    var content = this.template({ model: this.model, collection: this.collection });
-    this.$el.html(content);
+    this.remove();
     var list = this;
+    var i = 0;
     this.collection.forEach(function(model) {
-      var subview = new this.itemView({ model: model });
+      var subview = new list.itemView({ model: model, index: i++ });
       list.subviews().push(subview);
       list.$el.append(subview.render().$el);
     });
@@ -31,10 +32,10 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
     this.collection.add(new this.collection.model());
   },
   removeItem: function (event) {
-    this.collection.get($(event.target).attr('data-id')).destroy();
+    this.collection.at($(event.target).attr('data-index')).destroy();
   },
   updateItem: function (event) {
-    var item = this.collection.get($(event.target).attr('data-id'));
+    var item = this.collection.at($(event.target).attr('data-index'));
     var hash = {};
     hash[$(event.target).attr('name')] = $(event.target).val();
     item.set(hash);
