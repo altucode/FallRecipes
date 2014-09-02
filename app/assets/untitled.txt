@@ -79,24 +79,27 @@ The above only returns recipes that use all of the ingredients [a, b, c]
 
 SELECT
 
-  SELECT
+  (SELECT
     COUNT(ingredients.id)
   FROM
-    ingredients
+    ingredients JOIN usda_ingredients ON ingredients.usda_id = usda_ingredients.id
   WHERE
-    recipe_steps.recipe_id = recipe.id
+    ingredients.recipe_id = recipes.id AND usda_ingredients.item_name LIKE '%water%'
+  ) = 1
 
 
 
 
-
-SELECT
-  (1, 2, 3) as a1
-
-
-
-
-
+EXISTS (
+                SELECT
+                  ingredients.id
+                FROM
+                  ingredients
+                WHERE
+                  recipes.id = ingredients.recipe_id
+                  AND
+                  ingredients.unit_qty = ANY ('{4.0}'::float[])
+              )
 
 
 
