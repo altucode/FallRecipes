@@ -1,6 +1,7 @@
 class Recipe < ActiveRecord::Base
   include Notifiable
   include Subscribable
+  include Searchable
 
   has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>"}, default_url: "missing_photo.png"
 

@@ -1,11 +1,23 @@
 <form class="search">
-  <input name="tables[recipes][name]">
+  <label>
+    <input name="criteria[name]" placeholder="Search">
+  </label>
+
+
+
+
   <div class="advanced hidden">
-    <div class="ingredients-include">
-    </div>
-    <div class="ingredients-exclude">
-    </div>
-    <div class="users-include">
-    </div>
+    <ul class="ingredients">
+
+    </ul>
+    <ul class="tags">
+      <% search.tags.forEach(function (tag) { %>
+        <li class="<%= tag[0] %>">
+          <%= (tag[0] != '+' && tag[0] != '-' ? tag : tag.substring(1))%>
+        </li>
+      <% }); %>
+    </ul>
+    <ul class="users">
+    </ul>
   </div>
 </form>

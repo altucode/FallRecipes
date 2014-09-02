@@ -1,0 +1,105 @@
+SELECT
+  recipes.*
+FROM
+  recipes
+WHERE
+    NOT EXISTS (
+      SELECT
+        ingredients.*
+      FROM
+        ingredients
+      WHERE
+        recipes.id = ingredients.recipe_id
+        AND
+        ingredients.name NOT IN (a, b, c)
+    )
+
+******
+The above returns only recipes that use a subset of the ingredients listed
+
+
+
+SELECT
+  recipes.*
+FROM
+  recipes
+WHERE
+  EXISTS (
+    SELECT
+      ingredients.*
+    FROM
+      ingredients
+    WHERE
+      recipes.id = ingredients.recipe_id
+      AND
+      ingredients.name NOT IN (a, b, c)
+  )
+*****
+The above returns only recipes that use ingredients other than those listed
+
+SELECT
+  recipes.*
+FROM
+  recipes
+WHERE
+  NOT EXISTS (
+    SELECT
+      ingredients.*
+    FROM
+      ingredients
+    WHERE
+      recipes.id = ingredients.recipe_id
+      AND
+      ingredients.name IN (a, b, c)
+  )
+*****
+The above returns only recipes that do not use the listed ingredients
+
+SELECT
+  ingredients.*
+FROM
+  ingredients
+WHERE
+  ingredients.unit_qty IN '{1, 2, 3, 4}'::float[]
+
+
+
+ARRAY(
+    SELECT
+      recipes.name
+    FROM
+      recipes
+    WHERE
+      recipes.user_id = users.id
+  ) @> '{boiled water}'::varchar[]
+*****
+The above only returns recipes that use all of the ingredients [a, b, c]
+
+
+
+SELECT
+
+  SELECT
+    COUNT(ingredients.id)
+  FROM
+    ingredients
+  WHERE
+    recipe_steps.recipe_id = recipe.id
+
+
+
+
+
+SELECT
+  (1, 2, 3) as a1
+
+
+
+
+
+
+
+
+
+
+

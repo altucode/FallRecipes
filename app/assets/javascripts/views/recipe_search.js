@@ -10,7 +10,7 @@ FallRecipes.View.RecipeSearch = Backbone.View.extend({
     $.ajax({
       type: 'GET',
       url: "api/recipes/search",
-      data: $(this).serialize(),
+      data: form.serialize(),
       success: this.updateSearch.bind(this),
       error: function(xhr) {
         console.log("error");
@@ -41,10 +41,15 @@ FallRecipes.View.RecipeSearch = Backbone.View.extend({
     });
   },
   updateSearch: function (response) {
-
+    
   },
   formData: function() {
     return this._formData || (this._formData = {});
+  },
+  recipes: function() {
+    return this._recipes || (this._recipes = new FallRecipes.Collection({
+      model: FallRecipes.Models.Recipe
+    }));
   },
   names: function() {
     return this.formData()['names'] || (this.formData()['names'] = []);
