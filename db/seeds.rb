@@ -17,7 +17,7 @@ ingredient1_1 = Ingredient.create(recipe: recipe1, name: 'water', unit: 'cup', u
 
 step1_1 = RecipeStep.create(recipe: recipe1, ord: 1, text: "fill pot with water and set on stove")
 
-step1_2 = RecipeStep.create(recipe: recipe1, ord: 2, text: "set burner to 300 degrees farenheit")
+step1_2 = RecipeStep.create(recipe: recipe1, ord: 2, text: "set burner to 300 degrees fahrenheit")
 
 step1_3 = RecipeStep.create(recipe: recipe1, ord: 3, text: "wait until water starts to bubble")
 

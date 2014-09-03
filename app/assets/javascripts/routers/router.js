@@ -2,6 +2,7 @@ FallRecipes.Routers.Router = Backbone.Router.extend({
   routes: {
     '': 'root',
     'recipes': 'recipeIndex',
+    'recipes/search': 'recipeSearch',
     'recipes/:id': 'recipeShow',
     'users': 'userIndex',
     'users/:id': 'userShow',
@@ -21,6 +22,11 @@ FallRecipes.Routers.Router = Backbone.Router.extend({
         model: FallRecipes.Models.User,
         url: '/api/users'
       }));
+  },
+
+  recipeSearch: function() {
+    var search = new FallRecipes.Views.RecipeSearch();
+    this._swapView(search);
   },
 
   recipeShow: function(id) {

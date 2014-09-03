@@ -4,6 +4,12 @@
   </label>
   <label>
     <ul class="recipe-args">
+      <% log.recipe.forEach(function (rec) { %>
+        <li class="<%= rec[0] %>" data-id="<%= rec %>">
+          <%= (rec[0] != '' && rec[0] != '-' ? rec : rec.substring(1)) %>
+          <a class="delete">X</a>
+        </li>
+      <% }); %>
     </ul>
   </label>
 
@@ -13,8 +19,6 @@
   <input id="cook_time" name="order[cook_time][asc]" type="checkbox" value="true">
   <input id="servings" name="order[servings][asc]" type="checkbox" value="true">
   <input id="created_at" name="order[created_at][asc]" type="checkbox" value="true">
-
-  <button>Submit</button>
 
   <label>
     Results per Page
@@ -28,16 +32,34 @@
       Search by Ingredient
       <input name="criteria[ingredient_types][item_name]"></input>
       <ul class="ingredient-args">
+        <% log.ingredient_types.forEach(function(ing) { %>
+          <li class="<% ing[0] %>" data-id="<%= ing %>">
+            <%= (ing[0] != '+' && tag[0] != '-' ? ing : ing.substring(1)) %>
+            <a class="delete">X</a>
+          </li>
+        <% }); %>
       </ul>
     </label>
     <label>
       <input name="criteria[tags][name]"></input>
       <ul class="tag-args">
+        <% log.tags.forEach(function (tag) { %>
+          <li class="<%= tag[0] %>" data-id="<%= tag %>">
+            <%= (tag[0] != '+' && tag[0] != '-' ? tag : tag.substring(1)) %>
+            <a class="delete">X</a>
+          </li>
+        <% }); %>
       </ul>
     </label>
     <label>
       <input name="criteria[user][username]"></input>
       <ul class="user-args">
+        <% log.user.forEach(function (user) { %>
+          <li class="<%= user[0] %>" data-id="<%= user %>">
+            <%= (user[0] != '+' && user[0] != '-' ? user : user.substring(1)) %>
+            <a class="delete">X</a>
+          </li>
+        <% }); %>
       </ul>
     </label>
   </div>

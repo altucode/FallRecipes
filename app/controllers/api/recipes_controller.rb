@@ -1,8 +1,10 @@
 class Api::RecipesController < ApplicationController
-  before_action :require_current_user!, except: [:search, :show]
+  before_action :require_current_user!, except: [:index, :show]
 
-  def search
-    self.parse_search
+  def index
+    @search_log = {}
+    print params
+    @recipes = Recipe.where(Recipe.parse_search(params, @search_log))
   end
 
   def show

@@ -1,17 +1,29 @@
-FallRecipes.View.RecipeSearch = Backbone.View.extend({
-  template: ["recipe_search"],
+FallRecipes.Views.RecipeSearch = Backbone.View.extend({
+  template: JST["recipe_search"],
   events: {
-    "submit form.search" : "submitForm"
+    "submit form.search" : "submitForm",
+    "click recipe-args .delete" : "deleteRecipe",
+    "click ingredient-args .delete" : "deleteIngredient",
+    "click tag-args .delete" : "deleteTag",
+    "click user-args .delete" : "deleteUser",
+    "click :checkbox" : "sort"
+  },
+  initialize: function () {
   },
 
   submitForm: function (event) {
     event.preventDefault();
+    var view = this;
     var form = $(event.target);
     $.ajax({
       type: 'GET',
-      url: "api/recipes/search",
+      url: "api/recipes/",
       data: form.serialize(),
-      success: this.updateSearch.bind(this),
+      success: function(data) {
+        view._log = data;
+        console.log(data);
+        view.render();
+      },
       error: function(xhr) {
         console.log("error");
         var errors = $.parseJSON(xhr.responseText).errors;
@@ -19,29 +31,21 @@ FallRecipes.View.RecipeSearch = Backbone.View.extend({
       }
     });
   },
-  updateFormData: function(data) {
-    var view = this;
-    data.keys().forEach(function (type) {
-      if (typeof data[type] === typeof Object) {
-        data[type].keys().forEach(function (field) {
-          var params = data[type][field].match(/(?:[^\s"]+|"[^"]*")+/g);
-          params.forEach(function(param) {
-            if (!view[type]()[field]) {
-              view[type]()[field] = [];
-            }
-            if (view[type]()[field].indexOf(param) < 0) {
-              view[type]()[field].push(param);
-            }
-          });
-          data[type][field] = view[type]()[field];
-        });
-      } else {
-        view[type] = data[type];
-      }
-    });
+  render: function () {
+    var content = this.template({ log: this._log });
+    this.$el.html(content);
+
+    return this;
+  },
+  sort: function(event) {
+    event.target.prop('checked', !event.target.prop('checked'));
+    this.find("form").submit();
+    // this.find(":checkbox").each(function(index, ele) {
+//       $(ele).attr()
+//     });
   },
   updateSearch: function (response) {
-    
+
   },
   formData: function() {
     return this._formData || (this._formData = {});

@@ -6,8 +6,7 @@ Rails.application.routes.draw do
       resources :recipe_boxes, only: [:index]
       resources :menus, only: [:index]
     end
-    resources :recipes, only: [:create, :destroy, :show, :update] do
-      get :search
+    resources :recipes, only: [:index, :create, :destroy, :show, :update] do
       resources :reviews, only: [:index]
     end
     resources :recipe_boxes, only: [:create, :destroy, :update]

@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.serializejson.js
 //= require turbolinks
 //= require underscore
 //= require backbone
