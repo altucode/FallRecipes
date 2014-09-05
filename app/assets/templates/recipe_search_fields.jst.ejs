@@ -1,0 +1,42 @@
+<label>
+  Search by Ingredient
+  <input name="criteria[ingredient_types][item_name]"></input>
+  <ul class="ingredient-args">
+    <% if (log['ingredient_types']) { %>
+      <% log.ingredient_types.item_name.forEach(function(ing) { %>
+        <li class="<%= ing[0] %>" data-id="<%= ing %>">
+          <%= (ing[0] != '+' && ing[0] != '-' ? ing : ing.substring(1)) %>
+          <a class="delete">&#10005</a>
+        </li>
+      <% }); %>
+    <% } %>
+  </ul>
+</label>
+<label>
+  Search by Tags
+  <input name="criteria[tags][name]"></input>
+  <ul class="tag-args">
+    <% if (log['tags']) { %>
+      <% log.tags.name.forEach(function(tag) { %>
+        <li class="<%= tag[0] %>" data-id="<%= tag %>">
+          <%= (tag[0] != '+' && tag[0] != '-' ? tag : tag.substring(1)) %>
+          <a class="delete">&#10005</a>
+        </li>
+      <% }); %>
+    <% } %>
+  </ul>
+</label>
+<label>
+  Search by Author
+  <input name="criteria[user][username]"></input>
+  <ul class="user-args">
+    <% if (log['user']) { %>
+      <% log.user.username.forEach(function(user) { %>
+        <li class="<%= user[0] %>" data-id="<%= user %>">
+          <%= (user[0] != '+' && user[0] != '-' ? user : user.substring(1)) %>
+          <a class="delete">&#10005</a>
+        </li>
+      <% }); %>
+    <% } %>
+  </ul>
+</label>

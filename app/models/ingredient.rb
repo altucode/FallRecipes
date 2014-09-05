@@ -18,7 +18,11 @@ class Ingredient < ActiveRecord::Base
     ratio = self.get_usda_ratio
     self.usda.attributes.each_with_object({}) do |att, obj|
       if (att[0][0] == 'n' && att[0][3..4] != 'se')
-        obj[att[0][3..-1]] = att[1] * ratio
+        if att[0][9..11] == 'car'
+          obj['total_carbs'] = att[1] * ratio
+        else
+          obj[att[0][3..-1]] = att[1] * ratio
+        end
       end
     end
   end

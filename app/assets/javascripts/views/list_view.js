@@ -6,7 +6,9 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
   },
   initialize: function (options) {
     this.itemView = options.itemView || FallRecipes.Views.ListItemView;
+    this.itemTemplate = options.itemTemplate || JST['list_item']
     this.listenTo(this.collection, "add change remove", this.render);
+    console.log(this.itemTemplate);
   },
 
   remove: function() {
@@ -19,9 +21,8 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
   render: function() {
     this.remove();
     var list = this;
-    var i = 0;
     this.collection.forEach(function(model) {
-      var subview = new list.itemView({ model: model, index: i++ });
+      var subview = new list.itemView({ template: list.itemTemplate, model: model });
       list.subviews().push(subview);
       list.$el.append(subview.render().$el);
     });

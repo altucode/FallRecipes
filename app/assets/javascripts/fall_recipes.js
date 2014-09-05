@@ -20,7 +20,7 @@ FallRecipes.View = Backbone.View.extend({
 
 String.prototype.toTitleCase = function() {
   var i, j, str, lowers, uppers;
-  str = this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
+  str = this.replace('_', ' ').replace(/([^\W_]+[^\s-]*) */g, function(txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 

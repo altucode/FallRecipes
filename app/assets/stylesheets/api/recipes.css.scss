@@ -2,32 +2,200 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'colors';
 
-menu.recipe-menu {
-  display: block;
-  margin: auto;
-  font-size: 30px;
-  width: 500px;
+.recipe {
+  border: 1px solid $content-line-soft;
+  padding: 10px;
 }
 
 .recipe > .summary-box {
-  padding: 20px;
+  display: block;
   border: 1px solid transparent;
+  min-height: 280px;
 }
 
-.recipe > .summary-box > .image-frame {
+.recipe > .summary-box > .photo-frame {
   float: left;
-  height: 200px;
-  padding: 10px 20px;
+  height: 100%;
 }
 
-.recipe > .summary-box > .image-frame > img {
-  border: 2px solid black;
+.recipe > .summary-box > .photo-frame > img {
+  height: 250px;
+  width: 250px;
+  margin: 0 20px 0 0px;
+  border: 7px solid $content-background;
+  box-shadow: 0 0 .5em gray;
 }
 
 .recipe > .summary-box > .recipe-info {
+  display: block;
 }
 
 .recipe > .summary-box > .recipe-info > meter {
   width: 200px;
+  display: inline-block;
+}
+
+.recipe #reviews .content {
+  margin: -300px 0 0 -200px;
+  height: 600px;
+  width: 400px;
+}
+
+.recipe #reviews .content li {
+  width: 100%;
+}
+
+.recipe #reviews .content img {
+  height: 50px;
+  width: 50px;
+}
+
+.recipe-desc {
+  display: block;
+  font-size: 12px;
+}
+
+.recipe-desc > .avatar {
+  float: left;
+  height: 50px;
+  width: 50px;
+  border: 1px solid $content-line-strong;
+  margin: 5px 8px 0 0;
+}
+
+.recipe-menu {
+  text-align: center;
+  background: $menu-background;
+  margin: auto;
+  font-size: 30px;
+  margin: 0px 4px;
+  padding: 0 0 1px 0;
+}
+
+.recipe-menu menuitem:first-child {
+  margin-left: none;
+}
+
+.recipe-menu menuitem {
+  display: inline-block;
+  margin-left: 1px;
+}
+
+.recipe-menu menuitem > a {
+  padding: 0px;
+  height: 40px;
+  padding: 10px 20px;
+}
+
+.recipe h4 {
+  letter-spacing: 1px;
+}
+
+.recipe .ingredient-box {
+  margin: 20px 0px;
+}
+
+.recipe .ingredient-box ul {
+  list-style: none;
+  padding: 8px;
+  font-size: 14px;
+  vertical-align: center;
+}
+
+.recipe .ingredient-box ul li {
+  display: inline-block;
+  width: 50%;
+}
+
+.time-box {
+  position: static;
+  list-style: none;
+  width: 350px;
+  border-top: 1px solid $content-line-soft;
+  border-bottom: 1px solid $content-line-soft;
+}
+
+.time-box li:first-child {
+  border-left: none;
+}
+
+.time-box li {
+  width: 32%;
+  display: inline-block;
+  border-left: 1px solid $content-line-soft;
+  padding: 0px 20px 10px 20px;
+  margin: 10px 0px 10px 0px;
+  text-align: center;
+  color: $static-text-color;
+  font-size: 12px;
+}
+
+
+.time-box span {
+  font-weight: bold;
+  font-family: serif;
+  color: $header-color;
+  font-size: 20px;
+}
+
+
+.time-box .ready-in span {
+  color: $link-color;
+}
+
+.directions-box ul {
+  list-style-type: decimal;
+  list-style-position: inside;
+  font-size: 14px;
+}
+
+.directions-box ul li {
+  margin: 10px;
+}
+
+.nutrition-box ul {
+  width: 100%;
+}
+
+.nutrition-box li {
+  display: inline-block;
+  width: 49%;
+  font-size: 12px;
+}
+
+.nutrition-box li * {
+  display: inline-block;
+}
+
+.nutrition-box li *:nth-child(1) {
+  width: 100px;
+  font-weight: bold;
+}
+.nutrition-box li *:nth-child(2) {
+  width: 40px;
+}
+
+.nutrition-box meter {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.nutrition-box meter::-webkit-meter-bar {
+  background: #EEE;
+}
+
+.nutrition-box meter::-webkit-meter-optimum-value {
+  background: #86CC00; /* Green */
+}
+
+.nutrition-box meter::-webkit-meter-suboptimum-value {
+  background: #FFDB1A; /* Yellow */
+  border-radius: 3px;
+}
+
+.nutrition-box meter::-webkit-meter-even-less-good-value {
+  background: #CC4600; /* Red */
+  border-radius: 3px;
 }

@@ -3,7 +3,7 @@ json.extract! @recipe, :id, :name, :prep_time, :cook_time, :servings, :desc, :sc
 json.author do
   json.id @recipe.user_id
   json.name @recipe.user.username
-  json.image asset_path(@recipe.user.avatar.url)
+  json.avatar asset_path(@recipe.user.avatar.url)
 end
 
 if (user_logged_in? && current_user.id == @recipe.user_id)
@@ -23,3 +23,11 @@ end
 json.recipe_steps @recipe.recipe_steps do |recipe_step|
   json.extract! recipe_step, :id, :ord, :text
 end
+
+json.reviews @recipe.reviews do |review|
+  json.extract! review, :id, :user_id, :body, :score
+  json.username review.user.username
+  json.avatar asset_path(review.user.avatar.url)
+end
+
+json.nutrition @recipe.nutrition_info

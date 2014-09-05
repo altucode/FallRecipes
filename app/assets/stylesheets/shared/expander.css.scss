@@ -1,0 +1,32 @@
+.expander {
+  position: relative;
+}
+
+.expander > label {
+  cursor: pointer;
+}
+
+.expander > input[type=checkbox] {
+  display: none;
+}
+
+.expander > input[type=checkbox] + * {
+  display: none;
+}
+
+.expander > input[type=checkbox]:checked + * {
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+.expander.modal > input[type=checkbox]:checked + * {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  overflow: auto;
+}
+
+.expander.dropdown > input[type=checkbox]:checked + * {
+  position: absolute;
+}

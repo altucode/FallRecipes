@@ -1,38 +1,97 @@
 <div class="summary-box">
-  <div class="image-frame">
-    <img class="image" src="<%= recipe.escape('image') %>"></img>
+  <div class="photo-frame">
+    <img class="photo" src="<%= recipe.escape('image') %>"></img>
   </div>
   <div class="recipe-info">
-    <h1><%= recipe.escape('name').toTitleCase() %></h1>
+    <h2><%= recipe.escape('name').toTitleCase() %></h2>
     <meter class="score" value="<%= recipe.escape('score') %>"></meter>
-    Recipe by
-    <a href="#users/<%= recipe.author ? recipe.author.id : null %>">
-      <%= recipe.author ? recipe.author.name : null %>
-    </a>
-    <p><%= recipe.escape('desc') %></p>
+    <div id="reviews" class="expander modal">
+      <label for="review-expander">
+        Reviews (<%= recipe.reviews().length %>)
+      </label>
+      <input id="review-expander" type="checkbox">
+      <div class="content window">
+        <menu class="toolbar">
+          <menuitem>
+            <label class="link" for="review-expander">&#10005</button>
+          </menuitem>
+        </menu>
+      </div>
+    </div>
+    <div class="recipe-desc">
+      <img class="avatar" src="<%= recipe.author ? recipe.author.avatar : null %>"></img>
+      Recipe by
+      <a href="#users/<%= recipe.author ? recipe.author.id : null %>">
+        <%= recipe.author ? recipe.author.name : null %>
+      </a>
+      <p>"<%= recipe.escape('desc') %>"</p>
+    </div>
   </div>
 </div>
 <menu class="recipe-menu">
   <menuitem>
-    <button>Recipe Box</button>
-  </menuitem>
-  <menuitem>
-    <button>Shopping List</button>
-  </menuitem>
-  <menuitem>
-    <button>Menu</button>
-  </menuitem>
-  <menuitem>
-    <button>Email</button>
-  </menuitem>
-  <menuitem>
-    <button>Print</button>
+    <a class="button">Recipe Box</a>
+  </menuitem><menuitem>
+    <a class="button">Shopping List</a>
+  </menuitem><menuitem>
+    <a class="button">Menu</a>
+  </menuitem><menuitem>
+    <a href="mailto:?&body=Check out this recipe: <%=window.location.href%>"
+      class="button"><label>✉</label>Email</a>
+  </menuitem><menuitem>
+    <a class="button" class="print"><label>⎙</label>Print</a>
   </menuitem>
 </menu>
 <div class="ingredient-box">
-  <h2> Ingredients </h2>
+  <h4> Ingredients </h4>
 </div>
-<div class="instruction-box">
-  <h2> Instructions </h2>
+<ul class="time-box">
+  <li>
+    <h5>Prep</h5>
+    <% if (recipe.escape('prep_time') >= 3600) {%>
+      <span class="num"><%= recipe.escape('prep_time') / 3600 %></span>hr
+    <% } %>
+    <span class="num"><%= recipe.escape('prep_time') / 60 %></span>min
+  </li>
+  <li>
+    <h5>Cook</h5>
+    <% if (recipe.escape('cook_time') >= 3600) {%>
+      <span class="num"><%= recipe.escape('cook_time') / 3600 %></span>hr
+    <% } %>
+    <span class="num"><%= recipe.escape('cook_time') / 60 %></span>min
+  </li>
+  <li class="ready-in">
+    <h5>Ready In</h5>
+    <% if ((recipe.escape('prep_time') + recipe.escape('cook_time')) >= 3600) {%>
+      <span class="num"><%= (recipe.escape('prep_time') + recipe.escape('cook_time')) / 3600%></span>hr
+    <% } %>
+    <span class="num"><%= (recipe.escape('prep_time') + recipe.escape('cook_time')) / 60 %></span>min
+  </li>
+</ul>
+
+<div class="directions-box">
+  <h4> Directions </h4>
 </div>
-<div>
+
+<div class="nutrition-box">
+  <h4> Nutrition </h4>
+  <ul>
+    <% Object.keys(recipe.nutrition()).forEach(function (nf) { %>
+      <li>
+        <label><%= nf.toTitleCase() %></label>
+        <label>
+          <%= Math.round(recipe.nutrition()[nf]) %><%= recipe.getUnit(nf) %>
+        </label>
+        <meter
+          value="<%= recipe.getDailyPercent(nf) %>"
+          low=0.33
+          high=0.66
+          optimum="<%= recipe.getOptimal(nf) %>">
+        </meter>
+        <label>
+          <%= Math.round(recipe.getDailyPercent(nf)) %>%
+        </label>
+      </li>
+    <% }); %>
+  </ul>
+</div>

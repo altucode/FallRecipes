@@ -122,14 +122,14 @@ ActiveRecord::Schema.define(version: 20140829161523) do
   add_index "subscriptions", ["subscriber_id", "subscriber_type"], name: "index_subscriptions_on_subscriber_id_and_subscriber_type", using: :btree
 
   create_table "taggings", force: true do |t|
-    t.integer "recipe_id"
-    t.integer "tag_id"
+    t.integer "recipe_id", null: false
+    t.integer "tag_id",    null: false
   end
 
   add_index "taggings", ["recipe_id", "tag_id"], name: "index_taggings_on_recipe_id_and_tag_id", unique: true, using: :btree
 
   create_table "tags", force: true do |t|
-    t.string "name"
+    t.string "name", null: false
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree

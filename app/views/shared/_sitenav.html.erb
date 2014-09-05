@@ -4,19 +4,19 @@
   </a>
   <menu>
     <menuitem>
-      <form class="search">
-        <input class="search-box"></input>
+      <form class="search" action="#/recipes/search" method="GET">
+        <input class="search-box" name="q"></input>
         <button class="search">&#9906</button>
       </form>
     </menuitem>
     <menuitem>
       <a href="#/recipes/1">
-        Recipes
+        recipes
       </a>
     </menuitem>
     <menuitem>
       <a href="<%= api_recipes_url %>">
-        Videos
+        videos
       </a>
     </menuitem>
   </menu>

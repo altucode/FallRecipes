@@ -1,4 +1,5 @@
 FallRecipes.Views.Ingredient = Backbone.View.extend({
+  tagName: "li",
   template: JST['ingredient'],
 
   render: function() {

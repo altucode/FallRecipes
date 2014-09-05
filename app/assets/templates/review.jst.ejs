@@ -1,0 +1,6 @@
+<img src="<%= model.escape('avatar') %>"></img>
+<a href="#/users/<%= model.escape('user_id') %>">
+  <%= model.escape('username') %>
+</a>
+Score: <%= model.escape('score') %>
+<p><%= model.escape('body') %></p>

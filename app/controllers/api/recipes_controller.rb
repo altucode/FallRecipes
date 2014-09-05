@@ -4,7 +4,9 @@ class Api::RecipesController < ApplicationController
   def index
     @search_log = {}
     print params
-    @recipes = Recipe.where(Recipe.parse_search(params, @search_log))
+    print
+    @recipes = Recipe.parse_search(params, @search_log, :user)
+    print "LOG -->", @search_log
   end
 
   def show

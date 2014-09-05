@@ -18,7 +18,7 @@
 
 
 * {
-  font-family: sans-serif;
+  font-family: inherit;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -36,12 +36,37 @@ form {
 :-ms-input-placeholder { font-style: italic; } /* ie */
 
 html {
-  background: #CACACA;
+  background: $page-background;
+  font-family: sans-serif;
+  height: 100%;
 }
 
 body {
+  display: block;
   margin: auto;
   width: 900px;
+  background: $body-background;
+  min-height: 100%;
+  box-shadow: 0px 0px 1em lightgray;
+}
+
+#page {
+  display: block;
+  background: $body-background;
+  height: 100%;
+}
+
+#page > #content {
+  display: inline-block;
+  padding: 20px 10px;
+  width: 70%;
+}
+
+#page > #content-sidebar {
+  float: right;
+  border: 1px solid black;
+  width: 30%;
+  height: 500px;
 }
 
 .window {
@@ -57,7 +82,7 @@ body {
   color: red;
 }
 
-a, button.link {
+a, button.link, label.link {
   background: none;
   display: inline-block;
   color: $link-color;
@@ -66,7 +91,7 @@ a, button.link {
   margin: 0;
 }
 
-a:hover, button.link:hover {
+a:hover, button.link:hover, label.link:hover {
   color: $link-color-hover;
   background: none;
   cursor: pointer;
@@ -119,6 +144,14 @@ h1, h2, h3, h4, h5 {
   color: $header-color;
 }
 
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
 img.logo {
   display: block;
   width: 150px;
@@ -139,20 +172,26 @@ div.modal-container {
 }
 
 div.modal-layer {
-  position:absolute;
-  bottom: -2px;
+  position:fixed;
+  top: -2px;
   left: 0;
   right: 0;
   z-index: 9999;
   border: 1px solid transparent;
   background: rgba(0, 0, 0, 0.25);
+  max-height: 100%;
+  overflow: hidden;
 }
 
 div.modal-layer > .window {
   position: relative;
   left: -250px;
-  margin: 100% 0 200px 50%;
+  margin: 200px 0 100% 50%;
   width: 500px;
+}
+
+.window {
+  background: $content-background;
 }
 
 
@@ -183,7 +222,8 @@ div.modal-layer > .window {
 }
 
 nav.sitenav {
-  background: #CACACA;
+  padding: 0px 20px;
+  font-size: 20px;
 }
 
 nav.sitenav > menu {
@@ -209,7 +249,8 @@ nav.sitenav menu a:after {
   display: inline-block;
   width: 2px;
   top: 2px;
-  font-size: 20px;
+  left: -2px;
+  font-size: 25px;
   content: '›';
   color: $button-background-hover;
 }

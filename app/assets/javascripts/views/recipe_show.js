@@ -18,23 +18,31 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
     var content = this.template({ recipe: this.model });
     this.$el.html(content);
     this.$el.children('.ingredient-box').append(this.ingredientView().render().$el);
-    this.$el.children('.instruction-box').append(this.instructionView().render().$el);
-
+    this.$el.children('.directions-box').append(this.instructionView().render().$el);
+    this.$el.find('.expander .content').append(this.reviewView().render().$el);
     return this;
   },
   ingredientView: function() {
     return this._ingredientView ||
       (this._ingredientView = new FallRecipes.Views.ListView({
-        itemView: FallRecipes.Views.Ingredient,
+        itemTemplate: JST['ingredient'],
         collection: this.model.ingredients()
       }));
   },
   instructionView: function() {
     return this._instructionView ||
       (this._instructionView = new FallRecipes.Views.ListView({
-        itemView: FallRecipes.Views.Ingredient,
+        itemTemplate: JST['recipe_step'],
         collection: this.model.steps()
       }));
+  },
+  reviewView: function() {
+    return this._reviewView ||
+      (this._reviewView = new FallRecipes.Views.ListView({
+        itemTemplate: JST['review'],
+        collection: this.model.reviews()
+      }));
+
   }
 
 

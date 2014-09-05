@@ -1,0 +1,87 @@
+@import 'colors';
+
+table {
+  margin: auto;
+}
+
+.sorter {
+  background: $button-background;
+  cursor: pointer;
+}
+
+.sorter:hover {
+  background: $button-background-hover;
+}
+
+.sorter > input[type=checkbox] {
+  display: none;
+}
+
+.sorter > label {
+  display: block;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 0px;
+  width: 100%;
+}
+
+.sorter input[type=checkbox] + label:after {
+  padding-left: 5px;
+  content: '▲';
+}
+
+.sorter input[type=checkbox]:checked + label:after {
+  content: '▼';
+}
+
+col {
+  border: 1px solid black;
+  width: 150px;
+}
+
+tbody > tr {
+  background: $content-background;
+}
+
+.search .expander > .content {
+  border: 2px solid $content-line-strong;;
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.search .expander > .content > label {
+  display: inline-block;
+  width: 32.5%;
+  text-align: center;
+}
+
+.search .expander > .content > label > input {
+  display: block;
+  margin: auto;
+}
+
+.search .expander ul {
+  display: block;
+  list-style: none;
+  padding: 5px;
+}
+
+.search .expander ul > li {
+  display: inline-block;
+  background: $menu-highlight;
+  margin-top: 4px;
+  padding: 0px 2px;
+  border-radius: 2px;
+}
+
+.search .expander li.\+:before {
+  content: '+';
+  color: #4F7E6C;
+}
+
+.search .expander li.\-:before {
+  content: '-';
+  color: #C02F42;
+}
+
+

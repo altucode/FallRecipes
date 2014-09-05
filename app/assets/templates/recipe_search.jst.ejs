@@ -1,44 +1,71 @@
 <form class="search">
+  <i>
+    <p>
+      To filter your search results, use a plus (+) before any terms you want to require, a minus (-) before any terms you want to exclude, and double-quotes ("") around any phrases you want matched.
+    </p>
+    <p>
+      Example: (+grape -"grape nuts") would return 'grapes' and 'grape jelly' but not 'grape nuts'
+    </p>
+  </i>
   <label>
     <input name="criteria[recipe][name]" placeholder="Search">
-  </label>
-  <label>
     <ul class="recipe-args">
     </ul>
   </label>
-
-  <input id="name" name="order[name][asc]" type="checkbox" value="true">
-  <input id="username" name="order[username][asc]" type="checkbox" value="true">
-  <input id="prep_time" name="order[prep_time][asc]" type="checkbox" value="true">
-  <input id="cook_time" name="order[cook_time][asc]" type="checkbox" value="true">
-  <input id="servings" name="order[servings][asc]" type="checkbox" value="true">
-  <input id="created_at" name="order[created_at][asc]" type="checkbox" value="true">
-
-  <button>Submit</button>
-
   <label>
-    Results per Page
-    <input name="limit" type="range" value="20" min="5" max="50">
   </label>
 
-  <input name="page" type="range" value="1" min="1" max="1">
+  <button>Find Recipes</button>
 
-  <div class="advanced hidden">
-    <label>
-      Search by Ingredient
-      <input name="criteria[ingredient_types][item_name]"></input>
-      <ul class="ingredient-args">
-      </ul>
-    </label>
-    <label>
-      <input name="criteria[tags][name]"></input>
-      <ul class="tag-args">
-      </ul>
-    </label>
-    <label>
-      <input name="criteria[user][username]"></input>
-      <ul class="user-args">
-      </ul>
-    </label>
+  <div class="expander">
+    <label for="search_expander">Advanced</label>
+    <input id="search_expander" type="checkbox">
+    <div class="content">
+      
+    </div>
   </div>
+  <label>
+    Results per Page
+    <input name="limit" type="number" value="20">
+  </label>
+
+  <input name="page" type="number" value="1">
+
+  <table class="recipe-table">
+    <colgroup>
+      <col span=6>
+    </colgroup>
+    <thead>
+      <tr>
+        <th id="sort-name" class='sorter'>
+          <input id="name" name="sort_asc[name]" type="checkbox">
+          <label for="name">Name</label>
+        </th>
+        <th id="sort-username" class='sorter'>
+          <input id="username" name="sort_asc[users.username]" type="checkbox">
+          <label for="username">Author</label>
+        </th>
+        <th id="sort-prep_time" class='sorter'>
+          <input id="prep_time" name="sort_asc[prep_time]" type="checkbox">
+          <label for="prep_time">Prep Time</label>
+        </th>
+        <th id="sort-cook_time" class='sorter'>
+          <input id="cook_time" name="sort_asc[cook_time]" type="checkbox">
+          <label for="cook_time">Cook Time</label>
+        </th>
+        <th id="sort-servings" class='sorter'>
+          <input id="servings" name="sort_asc[servings]" type="checkbox">
+          <label for="servings">Servings</label>
+        </th>
+        <th id="sort-created_at" class='sorter'>
+          <input id="created_at" name="sort_asc[created_at]" type="checkbox">
+          <label for="created_at">Date</label>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>
 </form>
+

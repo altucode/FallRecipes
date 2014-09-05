@@ -16,4 +16,8 @@ class String
   def numeric?
     !!self.match(/\A[0-9.\"]+\Z/)
   end
+
+  def parenthesize
+    self.empty? ? self : "(#{self})"
+  end
 end
