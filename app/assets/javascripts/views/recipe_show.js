@@ -26,6 +26,7 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
     return this._ingredientView ||
       (this._ingredientView = new FallRecipes.Views.ListView({
         itemTemplate: JST['ingredient'],
+        itemClass: 'ingredient',
         collection: this.model.ingredients()
       }));
   },
@@ -33,6 +34,7 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
     return this._instructionView ||
       (this._instructionView = new FallRecipes.Views.ListView({
         itemTemplate: JST['recipe_step'],
+        itemClass: 'recipe_step',
         collection: this.model.steps()
       }));
   },
@@ -40,6 +42,7 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
     return this._reviewView ||
       (this._reviewView = new FallRecipes.Views.ListView({
         itemTemplate: JST['review'],
+        itemClass: 'review',
         collection: this.model.reviews()
       }));
 

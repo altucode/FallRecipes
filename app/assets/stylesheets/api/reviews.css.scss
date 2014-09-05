@@ -1,3 +1,47 @@
 // Place all the styles related to the api/reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'colors';
+
+#reviews .window {
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.25);
+}
+
+#reviews .window ul {
+  padding: 10px;
+}
+
+#reviews .window .review:first-child {
+  margin: 0;
+}
+
+.review {
+  display: block;
+  background: $content-background;
+  border-right: 1px solid $content-line-strong;
+  border-bottom: 1px solid $content-line-strong;
+  border-radius: 0px 5px 5px 5px;
+  margin: 10px 0 0 0;
+}
+
+.review div {
+  display: inline-block;
+}
+
+.review img {
+}
+
+.review a {
+  position: relative;
+  display: block;
+  top: -10px;
+}
+
+.review meter {
+  margin: 0 0 5px 0;
+}
+
+.review p {
+  padding: 10px;
+}

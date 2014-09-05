@@ -1,6 +1,8 @@
 <img src="<%= model.escape('avatar') %>"></img>
-<a href="#/users/<%= model.escape('user_id') %>">
+<div>
+  <a href="#/users/<%= model.escape('user_id') %>">
   <%= model.escape('username') %>
-</a>
-Score: <%= model.escape('score') %>
+  </a>
+  <meter value="<%= model.escape('score') %>" min=0 max=5></meter>
+</div>
 <p><%= model.escape('body') %></p>

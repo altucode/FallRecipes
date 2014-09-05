@@ -39,8 +39,21 @@
 
 .recipe #reviews .content {
   margin: -300px 0 0 -200px;
+  background: $menu-highlight;
   height: 600px;
   width: 400px;
+}
+
+.recipe #reviews .content .toolbar {
+  background: $menu-background;
+}
+
+.recipe #reviews .content .toolbar label {
+  color: $content-background;
+}
+
+.recipe #reviews .content .toolbar label:hover {
+  color: $button-background-hover;
 }
 
 .recipe #reviews .content li {

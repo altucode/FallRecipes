@@ -3,6 +3,7 @@ FallRecipes.Views.ListItemView = Backbone.View.extend({
 
   initialize: function (options) {
     this.template = options.template || JST["list_item"];
+    this.className = options.className;
     this.index = options.index;
   },
   render: function () {
