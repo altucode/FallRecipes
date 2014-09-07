@@ -1,0 +1,73 @@
+@import 'colors';
+
+.carousel {
+  position: relative;
+  list-style: none;
+  margin: auto;
+  height: 150px;
+  width: 200px;
+}
+
+.carousel input[type=radio] {
+  display: none;
+}
+
+.carousel label {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 40px;
+  padding-right: 0px;
+  padding-left: 40px;
+  z-index: 100;
+  outline: 0;
+  background: blue;
+}
+
+.carousel label:first-of-type {
+  padding-right: 40px;
+  right: 0;
+}
+
+
+.carousel > input[type=radio]:checked + label {
+  left: 40px;
+  right: 40px;
+  padding-left: 0;
+  padding-right: 0;
+  z-index: 102;
+}
+
+.carousel > input[type=radio]:checked + label + input[type=radio] + label {
+  padding-left: 0;
+  left: 40px;
+  z-index: 101;
+}
+
+.carousel > input[type=radio]:checked ~ input + label + input + label:last-of-type {
+  padding-left: 40px;
+  left: 0;
+  z-index: 99;
+}
+
+.carousel > input[type=radio]:checked ~ input[type=radio] + label {
+  padding-left: 0px;
+  padding-right: 40px;
+  left: 40px;
+  right: 0;
+}
+
+.carousel > input[type=radio]:checked + label:last-of-type {
+  padding-left: 0;
+  left: 40px;
+}
+
+.carousel input[type=radio] + label > * {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}

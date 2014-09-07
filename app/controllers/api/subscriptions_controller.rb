@@ -5,7 +5,7 @@ class Api::SubscriptionsController < ApplicationController
     @sub = current_user.subscriptions.create(sub_params)
     if @sub.valid?
       if (@sub.subscribable_type == "User")
-        @sub.subscribable.notifications.create(subscriber: @sub.subscriber)
+        @sub.subscribable.notifications.create(event_id: Subscription.CREATED, notifiable: @sub)
       end
       render json: @sub
     else

@@ -3,9 +3,9 @@ class Recipe < ActiveRecord::Base
   include Subscribable
   include Searchable
 
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>"}, default_url: "missing_photo.png"
+  belongs_to :user, inverse_of: :recipes, counter_cache: :recipe_count
 
-  belongs_to :user, inverse_of: :recipes
+  has_many :photos, inverse_of: :recipe, dependent: :destroy
 
   has_many :recipe_cards, inverse_of: :recipe, dependent: :destroy
   has_many :recipe_boxes, through: :recipe_cards, source: :recipe_box

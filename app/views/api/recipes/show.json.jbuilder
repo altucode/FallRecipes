@@ -10,7 +10,11 @@ if (user_logged_in? && current_user.id == @recipe.user_id)
   json.editable true
 end
 
-json.image asset_path(@recipe.image.url)
+json.photos @recipe.photos do |photo|
+  json.extract! photo, :id, :user_id, :caption
+  json.username photo.user.username
+  json.image asset_path(photo.image.url)
+end
 
 json.taggings @recipe.taggings do |tagging|
   json.extract! tagging, :id, :name

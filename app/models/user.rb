@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>", icon: "50x50>" }, default_url: "missing_avatar.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   has_many :recipes, inverse_of: :user
 
@@ -20,6 +21,8 @@ class User < ActiveRecord::Base
 
   has_many :reviews, inverse_of: :user
   has_many :reviewed_recipes, through: :reviews, source: :recipe
+
+  has_many :photos, inverse_of: :user, dependent: :destroy
 
   attr_reader :password
 

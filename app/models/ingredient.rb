@@ -7,7 +7,7 @@ class Ingredient < ActiveRecord::Base
   belongs_to :usda, class_name: "USDAIngredient", foreign_key: :usda_id, primary_key: :id
 
   def name=(name)
-    self.usda = USDAIngredient.find_by_name(name);
+    self.usda = USDAIngredient.find_by_name(name.downcase);
   end
 
   def name

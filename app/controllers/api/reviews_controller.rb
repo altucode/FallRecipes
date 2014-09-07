@@ -13,7 +13,7 @@ class Api::ReviewsController < ApplicationController
     @review = current_recipe.reviews.create(review_params)
 
     if @review.valid?
-      @review.recipe.user.notifications.create(Review.CREATED, @review)
+      @review.recipe.user.notifications.create(event_id: Review.CREATED, notifiable: @review)
       render json: @review
     else
       render json: @review.errors.full_messages, status: :unprocessable_entity
