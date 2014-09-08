@@ -19,7 +19,7 @@ class Api::RecipesController < ApplicationController
 
     if @recipe
       current_user.notify(Recipe::CREATED, @recipe)
-      render json: @recipe
+      render :show
     else
       render json: @recipe.errors.full_messages
     end
@@ -35,8 +35,9 @@ class Api::RecipesController < ApplicationController
     @recipe = current_user.recipes.find(params[:id])
 
     if @recipe.update_attributes(recipe_params)
+      @recipe.update_nutrition!
       @recipe.notify(Recipe::UPDATED, @recipe)
-      render json: @recipe
+      render :show
     else
       render json: @recipe.errors.full_messages, status: :unprocessable_entity
     end

@@ -36,6 +36,9 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
   ingredientView: function() {
     return this._ingredientView ||
       (this._ingredientView = new FallRecipes.Views.ListView({
+        itemAttrs: {
+          recipe_id: this.model.id
+        },
         itemView: FallRecipes.Views.Ingredient,
         collection: this.model.ingredients()
       }));
@@ -43,6 +46,9 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
   directionView: function() {
     return this._directionView ||
       (this._directionView = new FallRecipes.Views.ListView({
+        itemAttrs: {
+          recipe_id: this.model.id
+        },
         itemTemplate: JST['direction'],
         itemClass: 'direction',
         collection: this.model.directions()

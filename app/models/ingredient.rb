@@ -26,6 +26,7 @@ class Ingredient < ActiveRecord::Base
 
   def nutrition_info
     serving = self.get_serving
+    return {} if serving.nil?
     serving.each_with_object({}) do |(key, val), obj|
       obj[key] = (val.to_f * @ratio) if NUTRIENTS.include?(key)
     end
@@ -34,8 +35,8 @@ class Ingredient < ActiveRecord::Base
   def get_serving
     @ratio = 0.0
     fservings = Food.get(self.food_id)
-    fservings = fservings['servings'] if fservings['servings']
-    fservings = fservings['serving'] if fservings['serving']
+    fservings = fservings['servings'] if fservings && fservings['servings']
+    fservings = fservings['serving'] if fservings && fservings['serving']
     return fservings unless fservings.is_a?(Array)
     if fservings.any? { |serving| serving['measurement_description'] == self.unit }
       serving = fservings.find { |serving| serving['measurement_description'] == self.unit }

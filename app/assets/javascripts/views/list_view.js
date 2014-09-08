@@ -7,6 +7,7 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
     'click .editable .delete': 'deleteItem'
   },
   initialize: function (options) {
+    this.itemAttrs = options.itemAttrs || {};
     this.itemView = options.itemView || FallRecipes.Views.ListItemView;
     this.itemTemplate = options.itemTemplate || JST['list_item']
     this.itemClass = options.itemClass || this.itemView.prototype.className;
@@ -42,10 +43,12 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
     return this;
   },
   addItem: function (item) {
+    item.set('ord', this.collection.length);
     this.collection.add(item);
   },
   addNew: function (event) {
-    this.collection.add(new this.collection.model({ ord: this.collection.length }));
+    var item = new this.collection.model(this.itemAttrs);
+    this.addItem(item);
   },
   removeItem: function (event) {
     this.collection.at($(event.target).attr('data-index')).destroy();
@@ -53,7 +56,7 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
   updateItem: function (event) {
     console.log("UPDATE");
     var item = this.collection.at($(event.target).parent().attr('data-index'));
-    var hash = {};
+    var hash = { changed: true };
     hash[$(event.target).attr('name')] = $(event.target).val();
     item.set(hash);
   },

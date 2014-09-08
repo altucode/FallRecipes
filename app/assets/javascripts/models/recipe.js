@@ -30,8 +30,8 @@ FallRecipes.Models.Recipe = Backbone.Model.extend({
     return response;
   },
   saveChanges: function() {
-    this.ingredients().forEach(function(model) { model.save(); });
-    this.directions().forEach(function(model) { model.save(); });
+    this.ingredients().forEach(function(model) { if (model.get('changed')) {model.save();} });
+    this.directions().forEach(function(model) { if (model.get('changed')) {model.save();} });
     Backbone.Model.prototype.save.call(this);
   },
   photos: function() {

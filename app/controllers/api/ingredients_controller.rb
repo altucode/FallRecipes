@@ -16,7 +16,6 @@ class Api::IngredientsController < ApplicationController
   def update
     @ingredient = Ingredient.find(params[:id])
     if @ingredient.update_attributes(ingredient_params)
-      @ingredient.recipe.update_nutrition!
       @ingredient.recipe.notify(Recipe::UPDATED, @ingredient.recipe)
       render json: @ingredient
     else
@@ -27,7 +26,6 @@ class Api::IngredientsController < ApplicationController
   def destroy
     @ingredient = current_recipe.ingredients.find(params[:id])
     @ingredient.try(:destroy)
-    @ingredient.recipe.update_nutrition!
   end
 
   private
