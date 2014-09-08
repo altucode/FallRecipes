@@ -14,6 +14,19 @@ class CreateRecipes < ActiveRecord::Migration
 
       t.text :desc
 
+      t.integer :review_count
+
+      t.float :calories, null: false, default: 0
+      t.float :carbohydrate, null: false, default: 0
+      t.float :cholesterol, null: false, default: 0
+      t.float :fat, null: false, default: 0
+      t.float :fiber, null: false, default: 0
+      t.float :potassium, null: false, default: 0
+      t.float :protein, null: false, default: 0
+      t.float :saturated_fat, null: false, default: 0
+      t.float :sodium, null: false, default: 0
+      t.float :sugar, null: false, default: 0
+
       t.timestamps
     end
 

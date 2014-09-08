@@ -11,19 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829161523) do
+ActiveRecord::Schema.define(version: 20140908003220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "ingredients", force: true do |t|
-    t.integer "recipe_id"
-    t.integer "usda_id"
-    t.string  "unit"
-    t.float   "unit_qty"
+  create_table "directions", force: true do |t|
+    t.integer "recipe_id", null: false
+    t.integer "ord",       null: false
+    t.text    "body",      null: false
   end
 
-  add_index "ingredients", ["recipe_id", "usda_id"], name: "index_ingredients_on_recipe_id_and_usda_id", unique: true, using: :btree
+  add_index "directions", ["recipe_id", "ord"], name: "index_directions_on_recipe_id_and_ord", unique: true, using: :btree
+
+  create_table "ingredients", force: true do |t|
+    t.integer "recipe_id", null: false
+    t.integer "food_id",   null: false
+    t.string  "name",      null: false
+    t.string  "unit"
+    t.float   "unit_qty",  null: false
+  end
+
+  add_index "ingredients", ["recipe_id", "food_id"], name: "index_ingredients_on_recipe_id_and_food_id", unique: true, using: :btree
 
   create_table "menu_items", force: true do |t|
     t.integer  "menu_id",    null: false
@@ -56,42 +65,40 @@ ActiveRecord::Schema.define(version: 20140829161523) do
   add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type", using: :btree
   add_index "notifications", ["subscriber_id", "subscriber_type"], name: "index_notifications_on_subscriber_id_and_subscriber_type", using: :btree
 
-  create_table "recipe_boxes", force: true do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "photos", force: true do |t|
+    t.integer  "user_id",            null: false
+    t.integer  "recipe_id",          null: false
+    t.string   "caption"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
-  add_index "recipe_boxes", ["user_id"], name: "index_recipe_boxes_on_user_id", using: :btree
-
-  create_table "recipe_cards", force: true do |t|
-    t.integer  "recipe_box_id", null: false
-    t.integer  "recipe_id",     null: false
-    t.datetime "created_at"
-  end
-
-  add_index "recipe_cards", ["recipe_box_id", "recipe_id"], name: "index_recipe_cards_on_recipe_box_id_and_recipe_id", unique: true, using: :btree
-
-  create_table "recipe_steps", force: true do |t|
-    t.integer "recipe_id", null: false
-    t.integer "ord",       null: false
-    t.text    "text",      null: false
-  end
-
-  add_index "recipe_steps", ["recipe_id"], name: "index_recipe_steps_on_recipe_id", using: :btree
+  add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
 
   create_table "recipes", force: true do |t|
-    t.integer  "user_id",            null: false
-    t.string   "name",               null: false
-    t.integer  "prep_time",          null: false
-    t.integer  "cook_time",          null: false
-    t.integer  "servings",           null: false
+    t.integer  "user_id",                          null: false
+    t.string   "name",                             null: false
+    t.integer  "prep_time",                        null: false
+    t.integer  "cook_time",                        null: false
+    t.integer  "servings",                         null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.text     "desc"
+    t.integer  "review_count"
+    t.float    "calories",           default: 0.0, null: false
+    t.float    "carbohydrate",       default: 0.0, null: false
+    t.float    "cholesterol",        default: 0.0, null: false
+    t.float    "fat",                default: 0.0, null: false
+    t.float    "fiber",              default: 0.0, null: false
+    t.float    "potassium",          default: 0.0, null: false
+    t.float    "protein",            default: 0.0, null: false
+    t.float    "saturated_fat",      default: 0.0, null: false
+    t.float    "sodium",             default: 0.0, null: false
+    t.float    "sugar",              default: 0.0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -109,6 +116,24 @@ ActiveRecord::Schema.define(version: 20140829161523) do
   end
 
   add_index "reviews", ["recipe_id", "user_id"], name: "index_reviews_on_recipe_id_and_user_id", unique: true, using: :btree
+
+  create_table "shop_items", force: true do |t|
+    t.integer "shop_list_id", null: false
+    t.integer "usda_id",      null: false
+    t.string  "unit",         null: false
+    t.float   "unit_qt",      null: false
+  end
+
+  add_index "shop_items", ["shop_list_id", "usda_id"], name: "index_shop_items_on_shop_list_id_and_usda_id", unique: true, using: :btree
+
+  create_table "shop_lists", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shop_lists", ["user_id", "name"], name: "index_shop_lists_on_user_id_and_name", unique: true, using: :btree
 
   create_table "subscriptions", force: true do |t|
     t.integer  "subscribable_id",   null: false
@@ -134,28 +159,12 @@ ActiveRecord::Schema.define(version: 20140829161523) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
-  create_table "usda_ingredients", force: true do |t|
-    t.string "item_name"
-    t.string "nf_serving_size_unit"
-    t.float  "nf_serving_size_qty"
-    t.float  "nf_calories"
-    t.float  "nf_total_fat"
-    t.float  "nf_saturated_fat"
-    t.float  "nf_cholesterol"
-    t.float  "nf_sodium"
-    t.float  "nf_total_carbohydrate"
-    t.float  "nf_sugars"
-    t.float  "nf_protein"
-    t.float  "nf_dietary_fiber"
-  end
-
-  add_index "usda_ingredients", ["item_name"], name: "index_usda_ingredients_on_item_name", unique: true, using: :btree
-
   create_table "users", force: true do |t|
+    t.string   "display_name",        null: false
     t.string   "username",            null: false
-    t.string   "first_name",          null: false
-    t.string   "last_name",           null: false
     t.string   "email",               null: false
+    t.integer  "recipe_count"
+    t.integer  "review_count"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

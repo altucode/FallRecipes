@@ -42,3 +42,9 @@ String.prototype.toTitleCase = function() {
 
   return str;
 };
+
+Number.prototype.pad = function(width, c) {
+  c = c || '0';
+  var str = this.toString();
+  return str.length >= width ? str : new Array(width - str.length + 1).join(c) + str;
+};

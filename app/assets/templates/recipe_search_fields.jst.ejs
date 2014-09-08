@@ -1,9 +1,9 @@
 <label>
   Search by Ingredient
-  <input name="criteria[ingredient_types][item_name]"></input>
+  <input name="criteria[ingredients][name]"></input>
   <ul class="ingredient-args">
-    <% if (log['ingredient_types']) { %>
-      <% log.ingredient_types.item_name.forEach(function(ing) { %>
+    <% if (log['ingredients']) { %>
+      <% log.ingredients.name.forEach(function(ing) { %>
         <li class="<%= ing[0] %>" data-id="<%= ing %>">
           <%= (ing[0] != '+' && ing[0] != '-' ? ing : ing.substring(1)) %>
           <a class="delete">&#10005</a>

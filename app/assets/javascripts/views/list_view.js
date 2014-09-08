@@ -9,7 +9,6 @@ FallRecipes.Views.ListView = FallRecipes.View.extend({
     this.itemTemplate = options.itemTemplate || JST['list_item']
     this.itemClass = options.itemClass;
     this.listenTo(this.collection, "add change remove", this.render);
-    console.log(this.itemTemplate);
   },
 
   remove: function() {

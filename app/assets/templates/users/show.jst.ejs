@@ -1,0 +1,47 @@
+<div class="info-box">
+  <img class="avatar" src="<%= user.escape('avatar') %>"></img>
+  <h1><%= user.escape('username') %></h1>
+</div>
+<div class="about-box">
+  <h2>About Me</h2>
+  <p><%= user.escape('about') %></p>
+</div>
+<div class="recipe-box">
+  <h2>My Recipes</h2>
+  <ul>
+    <% user.recipes().forEach(function (recipe) { %>
+      <li>
+        <img class="thumb" src="<%= recipe.escape('photo') %>"></img>
+        <a href="#/recipes/<%= recipe.escape('id') %>">
+          <%= recipe.escape('name') %>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+</div>
+<div class="follows-box">
+  <h2>Following</h2>
+  <ul>
+    <% user.follows().forEach(function (follow) { %>
+      <li>
+        <a href="#/users/<%= follow.escape('id') %>">
+          <img class="thumb" src="<%= follow.escape('avatar') %>"></img>
+          <%= follow.escape('username') %>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+</div>
+<div class="followers-box">
+  <h2>Followers</h2>
+  <ul>
+    <% user.followers().forEach(function (follower) { %>
+      <li>
+        <a href="#/users/<%= follower.escape('id') %>">
+          <img class="thumb" src="<%= follower.escape('avatar') %>"></img>
+          <%= follower.escape('username') %>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+</div>

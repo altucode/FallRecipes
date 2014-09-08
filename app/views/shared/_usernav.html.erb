@@ -31,7 +31,7 @@
       <menuitem class="dropdown">
         <a href="#notifications">Notifications</a>
         <menu class="dropdown hidden">
-          <% current_user.pending_notifications.each do |notification| %>
+          <% current_user.notifications.each do |notification| %>
             <menuitem data-id="<%= notification.id %>">
               <%= notification.event_string %>
             </menuitem>

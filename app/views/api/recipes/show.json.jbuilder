@@ -10,6 +10,8 @@ if (user_logged_in? && current_user.id == @recipe.user_id)
   json.editable true
 end
 
+json.first_photo @recipe.first_photo_url
+
 json.photos @recipe.photos do |photo|
   json.extract! photo, :id, :user_id, :caption
   json.username photo.user.username
@@ -21,11 +23,11 @@ json.taggings @recipe.taggings do |tagging|
 end
 
 json.ingredients @recipe.ingredients do |ingredient|
-  json.extract! ingredient, :id, :name, :unit, :unit_qty, :nutrition_info
+  json.extract! ingredient, :id, :name, :unit, :unit_qty
 end
 
-json.recipe_steps @recipe.recipe_steps do |recipe_step|
-  json.extract! recipe_step, :id, :ord, :text
+json.directions @recipe.directions do |recipe_step|
+  json.extract! recipe_step, :id, :ord, :body
 end
 
 json.reviews @recipe.reviews do |review|
@@ -34,4 +36,6 @@ json.reviews @recipe.reviews do |review|
   json.avatar asset_path(review.user.avatar.url)
 end
 
-json.nutrition @recipe.nutrition_info
+json.nutrition do
+  json.extract! @recipe, :calories, :carbohydrate, :cholesterol, :fat, :fiber, :potassium, :protein, :saturated_fat, :sodium, :sugar
+end

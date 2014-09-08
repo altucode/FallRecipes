@@ -1,5 +1,5 @@
 FallRecipes.Views.RecipeShow = Backbone.View.extend({
-  template: JST["recipe"],
+  template: JST["recipes/recipe"],
   className: function() {
     return 'recipe' + (this.model.get('editable') ? 'editable' : '');
   },
@@ -18,9 +18,17 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
     var content = this.template({ recipe: this.model });
     this.$el.html(content);
     this.$el.children('.ingredient-box').append(this.ingredientView().render().$el);
-    this.$el.children('.directions-box').append(this.instructionView().render().$el);
+    this.$el.children('.directions-box').append(this.directionView().render().$el);
     this.$el.find('.expander .content').append(this.reviewView().render().$el);
+    //this.$el.find('.photo-frame').append(this.photoView().render().$el);
     return this;
+  },
+  photoView: function() {
+    return this._photoView ||
+    (this._photoView = new FallRecipes.Views.Carousel({
+      itemTemplate: JST['photo'],
+      items: this.model.photos()
+    }));
   },
   ingredientView: function() {
     return this._ingredientView ||
@@ -30,12 +38,12 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
         collection: this.model.ingredients()
       }));
   },
-  instructionView: function() {
-    return this._instructionView ||
-      (this._instructionView = new FallRecipes.Views.ListView({
-        itemTemplate: JST['recipe_step'],
-        itemClass: 'recipe_step',
-        collection: this.model.steps()
+  directionView: function() {
+    return this._directionView ||
+      (this._directionView = new FallRecipes.Views.ListView({
+        itemTemplate: JST['direction'],
+        itemClass: 'direction',
+        collection: this.model.directions()
       }));
   },
   reviewView: function() {

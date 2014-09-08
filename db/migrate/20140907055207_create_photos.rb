@@ -6,7 +6,7 @@ class CreatePhotos < ActiveRecord::Migration
 
       t.string :caption
 
-      t.attachment :image, null: false
+      t.attachment :image
     end
     add_index :photos, :user_id
   end

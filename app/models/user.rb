@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :recipes, inverse_of: :user
 
-  has_many :recipe_boxes, inverse_of: :user, dependent: :destroy
+  has_many :shop_lists, inverse_of: :user, dependent: :destroy
 
   has_many :menus, inverse_of: :user, dependent: :destroy
 
@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
   has_many :photos, inverse_of: :user, dependent: :destroy
 
   attr_reader :password
+
+  def name
+    self.username
+  end
 
   def password=(password)
     @password = password;
@@ -60,8 +64,8 @@ class User < ActiveRecord::Base
     SecureRandom::urlsafe_base64(16)
   end
 
-  validates :username, presence: true, length: { minimum: 2 }
-  validates :first_name, :last_name, :email, presence: true
+  validates :display_name, :username, presence: true, length: { minimum: 2 }
+  validates :email, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :password_digest, presence: true
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/

@@ -1,3 +1,24 @@
 // Place all the styles related to the api/users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user ul {
+  list-style: none;
+}
+
+.user > div:first-of-type {
+  display: block;
+  height: 30%;
+  width: 100%;
+}
+
+.user > div:nth-of-type(n+2) {
+  display: inline-block;
+  width: 45%;
+  height: 200px;
+}
+
+.user > div:nth-of-type(2n+3) {
+  float: right;
+  height: 200px;
+}

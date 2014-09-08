@@ -5,6 +5,7 @@ class Api::IngredientsController < ApplicationController
     @ingredient = current_recipe.create(ingredient_params)
 
     if @ingredient.valid?
+      @ingredient.recipe.update_nutrition!
       @ingredient.recipe.notify(Recipe.UPDATED)
       render json: @ingredient, include: :nutrition_info
     else
@@ -15,11 +16,18 @@ class Api::IngredientsController < ApplicationController
   def update
     @ingredient = Ingredient.find(params[:id])
     if @ingredient.update_attributes(ingredient_params)
+      @ingredient.recipe.update_nutrition!
       @ingredient.recipe.notify(Recipe.UPDATED)
       render json: @ingredient, include: :nutrition_info
     else
       render json: @ingredient.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @ingredient = current_recipe.find(params[:id])
+    @ingredient.try(:destroy)
+    @ingredient.recipe.update_nutrition!
   end
 
   private

@@ -2,7 +2,7 @@
   <tr>
     <td>
       <a href="#/recipes/<%= recipe.id %>">
-        <%= recipe.name %>
+        <%= recipe.name.toTitleCase() %>
       </a>
     </td>
     <td>
@@ -11,10 +11,12 @@
       </a>
     </td>
     <td>
-      <%= Math.floor(recipe.prep_time/3600) %>:<%= recipe.prep_time/60 %>
+      <%= Math.floor(recipe.prep_time / 3600) %>:
+      <%= (recipe.prep_time / 60 % 60).pad(2) %>
     </td>
     <td>
-      <%= Math.floor(recipe.cook_time/3600) %>:<%= recipe.cook_time/60 %>
+      <%= Math.floor(recipe.cook_time / 3600) %>:
+      <%= (recipe.cook_time / 60 % 60).pad(2) %>
     </td>
     <td>
       <%= recipe.servings %>

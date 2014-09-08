@@ -10,6 +10,10 @@ class Photo < ActiveRecord::Base
   validates :image, attachment_presence: true
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
+  def image_url=(url)
+    self.image = URI.parse(url)
+  end
+
   def event_string(event_id)
     case event_id
     when CREATED

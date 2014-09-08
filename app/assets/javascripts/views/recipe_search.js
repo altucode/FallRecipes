@@ -6,8 +6,8 @@ FallRecipes.Views.RecipeSearch = Backbone.View.extend({
     "submit form.search" : "submitForm",
     "click recipe-args .delete" : "deleteRecipe",
     "click .ingredient-args .delete" : "deleteIngredient",
-    "click tag-args .delete" : "deleteTag",
-    "click user-args .delete" : "deleteUser",
+    "click .tag-args .delete" : "deleteTag",
+    "click .user-args .delete" : "deleteUser",
     "change .sorter :checkbox" : "sort"
   },
   initialize: function (options) {
@@ -87,12 +87,10 @@ FallRecipes.Views.RecipeSearch = Backbone.View.extend({
     }
   },
   deleteIngredient: function(event) {
-    console.log("DELETE INGREDIENT");
-    console.log(this.ingredientData().item_name);
-    if (this.ingredientData().item_name) {
-      var i = this.ingredientData().item_name.indexOf($(event.target).parent().attr('data-id'));
+    if (this.ingredientData().name) {
+      var i = this.ingredientData().name.indexOf($(event.target).parent().attr('data-id'));
       if (i >= 0) {
-        this.ingredientData().item_name.splice(i, 1);
+        this.ingredientData().name.splice(i, 1);
       }
       $(event.target).parent().remove();
     }
@@ -103,6 +101,7 @@ FallRecipes.Views.RecipeSearch = Backbone.View.extend({
       if (i >= 0) {
         this.tagData().name.splice(i, 1);
       }
+      $(event.target).parent().remove();
     }
   },
   deleteUser: function(event) {
@@ -111,13 +110,14 @@ FallRecipes.Views.RecipeSearch = Backbone.View.extend({
       if (i >= 0) {
         this.userData().username.splice(i, 1);
       }
+      $(event.target).parent().remove();
     }
   },
   recipeData: function() {
     return this.log()['recipe'] || (this.log()['recipe'] = {});
   },
   ingredientData: function() {
-    return this.log()['ingredient_types'] || (this.log()['ingredient_types'] = {});
+    return this.log()['ingredients'] || (this.log()['ingredients'] = {});
   },
   tagData: function() {
     return this.log()['tags'] || (this.log()['tags'] = {});

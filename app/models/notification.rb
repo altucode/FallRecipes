@@ -5,6 +5,6 @@ class Notification < ActiveRecord::Base
   validates :subscriber, :notifiable, :event_id, presence: true
 
   def event_string
-    notifiable.event_string
+    notifiable.event_string(self.event_id)
   end
 end

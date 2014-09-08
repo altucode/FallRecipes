@@ -1,3 +1,5 @@
+require 'cgi'
+
 class Hash
   def hmap(&block)
     each_with_object({}) { |(k, v), o| o[k] = block.(k, v) }
@@ -19,5 +21,9 @@ class String
 
   def parenthesize
     self.empty? ? self : "(#{self})"
+  end
+
+  def esc
+    CGI.escape(self).gsub("%7E", "~").gsub("+", "%20")
   end
 end

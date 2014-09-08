@@ -14,6 +14,10 @@ FallRecipes.Models.User = Backbone.Model.extend({
       this.follows().set(response.follows);
       delete response.follows;
     }
+    if (response.followers) {
+      this.followers().set(response.followers);
+      delete response.followers;
+    }
     return response;
   },
   recipes: function() {
@@ -33,6 +37,13 @@ FallRecipes.Models.User = Backbone.Model.extend({
   follows: function() {
     return this._follows ||
       (this._follows = new FallRecipes.Collection({}, {
+        model: Backbone.Model,
+        url: 'api/subscriptions'
+      }));
+  },
+  followers: function() {
+    return this._followers ||
+      (this._followers = new FallRecipes.Collection({}, {
         model: Backbone.Model,
         url: 'api/subscriptions'
       }));

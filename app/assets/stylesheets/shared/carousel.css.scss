@@ -4,15 +4,15 @@
   position: relative;
   list-style: none;
   margin: auto;
-  height: 150px;
-  width: 200px;
+  height: 100%;
+  width: 100%;
 }
 
-.carousel input[type=radio] {
+.carousel > input[type=radio] {
   display: none;
 }
 
-.carousel label {
+.carousel > label {
   display: block;
   position: absolute;
   top: 0;
@@ -26,7 +26,7 @@
   background: blue;
 }
 
-.carousel label:first-of-type {
+.carousel > label:first-of-type {
   padding-right: 40px;
   right: 0;
 }
@@ -64,7 +64,7 @@
   left: 40px;
 }
 
-.carousel input[type=radio] + label > * {
+.carousel > input[type=radio] + label > * {
   display: table-cell;
   vertical-align: middle;
   text-align: center;

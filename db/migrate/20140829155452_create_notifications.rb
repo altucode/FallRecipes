@@ -9,7 +9,7 @@ class CreateNotifications < ActiveRecord::Migration
 
       t.integer :event_id, null: false
 
-      t.boolean :is_read
+      t.boolean :is_read, null: false, default: false
 
       t.datetime :created_at
     end
