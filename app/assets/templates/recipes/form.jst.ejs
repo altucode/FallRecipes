@@ -1,0 +1,90 @@
+<div class="summary-box">
+  <div class="photo-frame">
+    <img class="photo" src="<%= recipe.escape('first_photo') %>"></img>
+  </div>
+  <div class="recipe-info">
+    <input
+      name="recipe[name]"
+      value="<%= recipe.escape('name').toTitleCase()%>">
+    <div class="recipe-desc">
+      <textarea name="recipe[desc]">"<%= recipe.escape('desc') %>"</p>
+    </div>
+  </div>
+</div>
+<div class="ingredient-box">
+  <h4> Ingredients <small>
+    (serves <input
+              name="recipe[servings]"
+              value="<%= recipe.escape('servings')%>">
+  </small> </h4>
+  <small>Fractions are a-okay!</small>
+  <form>
+    <input name="name" minlength=2>
+    <select
+      name="unit_qty"
+      placeholder="ex: 1/2"
+      pattern="^\d+(?:\/\d+)*$">
+    <select name="unit">
+      <option>cup</option>
+      <option>fl oz</option>
+      <option>g</option>
+      <option>kg</option>
+      <option>l</option>
+      <option>large</option>
+      <option>lb</option>
+      <option>ml</option>
+      <option>oz</option>
+      <option>pint</option>
+      <option>quart</option>
+      <option>small</option>
+      <option>stick</option>
+      <option>tbsp</option>
+      <option>tsp</option>
+      <option>whole</option>
+    </select>
+    <button>New Ingredient</button>
+  </form>
+</div>
+<ul class="time-box">
+  <li>
+    <h5>Prep</h5>
+    <input type="number" value="<%= recipe.escape('prep_hours') / 3600 %>">hr
+    <input type="number" value="<%= recipe.escape('prep_mins')/60%60 %>">min
+  </li>
+  <li>
+    <h5>Cook</h5>
+    <input type="number" value="<%= recipe.escape('cook_hours') / 3600 %>">hr
+    <input type="number" value="<%= recipe.escape('cook_mins')/60%60 %>">min
+  </li>
+</ul>
+
+<div class="directions-box">
+  <h4> Directions </h4>
+  <form>
+    <textarea name="body"></textarea>
+  </form>
+  <button>New Direction</button>
+</div>
+
+<div class="nutrition-box">
+  <h4> Nutrition (per serving) </h4>
+  <ul>
+    <% Object.keys(recipe.nutrition()).forEach(function (nf) { %>
+      <li>
+        <label><%= nf.toTitleCase() %></label>
+        <label>
+          <%= Math.round(recipe.nutrition()[nf]) %><%= recipe.getUnit(nf) %>
+        </label>
+        <meter
+          value="<%= recipe.getDailyPercent(nf) %>"
+          low=0.33
+          high=0.66
+          optimum="<%= recipe.getOptimal(nf) %>">
+        </meter>
+        <label>
+          <%= Math.round(recipe.getDailyPercent(nf)*100) %>%
+        </label>
+      </li>
+    <% }); %>
+  </ul>
+</div>

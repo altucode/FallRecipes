@@ -2,11 +2,12 @@
   <div class="photo-frame">
     <img class="photo" src="<%= recipe.escape('first_photo') %>"></img>
   </div>
+  <a class="save">Save</a>
   <div class="recipe-info">
     <h2><%= recipe.escape('name').toTitleCase() %></h2>
     <meter class="score" value="<%= recipe.escape('score') %>"></meter>
     <div id="reviews" class="expander modal">
-      <label for="review-expander">
+      <label class="link" for="review-expander">
         Reviews (<%= recipe.reviews().length %>)
       </label>
       <input id="review-expander" type="checkbox">
@@ -43,7 +44,7 @@
   </menuitem>
 </menu>
 <div class="ingredient-box">
-  <h4> Ingredients <small>(<%= recipe.escape('servings') %> servings)</small> </h4>
+  <label> Ingredients <small>(<%= recipe.escape('servings') %> servings)</small> </label>
 </div>
 <ul class="time-box">
   <li>
@@ -98,3 +99,4 @@
     <% }); %>
   </ul>
 </div>
+

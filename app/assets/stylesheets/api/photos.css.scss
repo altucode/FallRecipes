@@ -4,6 +4,23 @@
 
 @import 'colors';
 
+div.photo-frame {
+  float: left;
+  height: 100%;
+}
+
+div.photo-frame > img {
+  height: 250px;
+  width: 250px;
+  margin: 0 20px 0 0px;
+  border: 7px solid $content-background;
+  box-shadow: 0 0 .5em gray;
+}
+
+img.avatar {
+
+}
+
 img.thumb {
   height: 50px;
   width: 50px;

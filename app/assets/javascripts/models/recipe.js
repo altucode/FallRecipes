@@ -29,6 +29,11 @@ FallRecipes.Models.Recipe = Backbone.Model.extend({
     }
     return response;
   },
+  saveChanges: function() {
+    this.ingredients().forEach(function(model) { model.save(); });
+    this.directions().forEach(function(model) { model.save(); });
+    Backbone.Model.prototype.save.call(this);
+  },
   photos: function() {
     return this._photos ||
       (this._photos = new FallRecipes.Collection({}, {
@@ -39,7 +44,7 @@ FallRecipes.Models.Recipe = Backbone.Model.extend({
   ingredients: function() {
     return this._ingredients ||
       (this._ingredients = new FallRecipes.Collection({}, {
-        model: FallRecipes.Models.Model,
+        model: FallRecipes.Models.Ingredient,
         url: 'api/ingredients'
       }));
   },

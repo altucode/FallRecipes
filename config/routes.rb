@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :recipes, only: [:index, :create, :destroy, :show, :update] do
       resources :reviews, only: [:index]
     end
+    resources :ingredients, only: [:create, :destroy, :update];
+    resources :directions, only: [:create, :destroy, :update];
     resources :recipe_boxes, only: [:create, :destroy, :update]
     resources :menus, only: [:create, :destroy, :update]
     resources :reviews, only: [:create, :destroy, :update]

@@ -3,6 +3,7 @@ module Subscribable
 
   included do
     has_many :subs, class_name: "Subscription", as: :subscribable
+    has_many :subscribers, through: :subs, source_type: "User"
   end
 
   def notify(event_id, notifiable)

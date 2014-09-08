@@ -15,19 +15,6 @@
   min-height: 280px;
 }
 
-.recipe > .summary-box > .photo-frame {
-  float: left;
-  height: 100%;
-}
-
-.recipe > .summary-box > .photo-frame > img {
-  height: 250px;
-  width: 250px;
-  margin: 0 20px 0 0px;
-  border: 7px solid $content-background;
-  box-shadow: 0 0 .5em gray;
-}
-
 .recipe > .summary-box > .recipe-info {
   display: block;
 }
@@ -35,6 +22,16 @@
 .recipe > .summary-box > .recipe-info > meter {
   width: 200px;
   display: inline-block;
+}
+
+.recipe > .summary-box > .save {
+  display: none;
+  float: right;
+}
+
+.editable .summary-box > .save {
+  display: inline-block;
+  float: right;
 }
 
 .recipe #reviews .content {
@@ -152,16 +149,6 @@
 
 .time-box .ready-in span {
   color: $link-color;
-}
-
-.directions-box ul {
-  list-style-type: decimal;
-  list-style-position: inside;
-  font-size: 14px;
-}
-
-.directions-box ul li {
-  margin: 10px;
 }
 
 .nutrition-box ul {

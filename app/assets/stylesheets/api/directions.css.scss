@@ -1,3 +1,23 @@
 // Place all the styles related to the api/directions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'colors';
+
+.directions-box ul {
+  list-style-type: decimal;
+  list-style-position: inside;
+  font-size: 14px;
+}
+
+.directions-box ul li {
+  margin: 10px;
+}
+
+.directions-box ul > li textarea {
+  border: 1px solid $content-line-soft;
+  width: 100%;
+  margin-left: 10px;
+  min-height: 50px;
+  font-size: 14px;
+}

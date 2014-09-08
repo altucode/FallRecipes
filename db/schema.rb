@@ -52,12 +52,12 @@ ActiveRecord::Schema.define(version: 20140908003220) do
   add_index "menus", ["user_id"], name: "index_menus_on_user_id", using: :btree
 
   create_table "notifications", force: true do |t|
-    t.integer  "subscriber_id",   null: false
-    t.string   "subscriber_type", null: false
-    t.integer  "notifiable_id",   null: false
-    t.string   "notifiable_type", null: false
-    t.integer  "event_id",        null: false
-    t.boolean  "is_read"
+    t.integer  "subscriber_id",                   null: false
+    t.string   "subscriber_type",                 null: false
+    t.integer  "notifiable_id",                   null: false
+    t.string   "notifiable_type",                 null: false
+    t.integer  "event_id",                        null: false
+    t.boolean  "is_read",         default: false, null: false
     t.datetime "created_at"
   end
 

@@ -11,10 +11,43 @@ window.FallRecipes = {
   }
 };
 
+FallRecipes.Model = Backbone.Model.extend({
+  initialize: function(options) {
+    if (options.delayUpdate) {
+      var model = this;
+      this.listenTo(this, 'add change remove', function() { model.changed = true; });
+    }
+  },
+  update: function() {
+
+  }
+});
+
 
 FallRecipes.View = Backbone.View.extend({
   className: function() {
     return this.editable;
+  },
+  initialize: function(options) {
+    if (options.delayUpdate) {
+      if (this.model) {
+        var m = this.model;
+        this.listenTo(this.model, 'add change remove', function() { m.changed = true; });
+      }
+      if (this.collection) {
+        var c = this.collection;
+        this.listenTo(this.model, 'add change remove', function() { m.changed = true; });
+      }
+    } else {
+      if (this.model) {
+        var m = this.model;
+        this.listenTo(this.model, 'add change remove', this.render);
+      }
+      if (this.collection) {
+        var c = this.collection;
+        this.listenTo(this.model, 'add change remove', this.render);
+      }
+    }
   }
 });
 
@@ -41,6 +74,34 @@ String.prototype.toTitleCase = function() {
        uppers[i].toUpperCase());
 
   return str;
+};
+
+String.prototype.fromRat = function() {
+  var arr = this.split('/', 2).filter(Boolean);
+  return arr.length > 1 ? parseFloat(arr[0]) / parseFloat(arr[1]) : parseFloat(arr[0]);
+};
+
+Number.prototype.toRat = function(proper) {
+    var tolerance = 1.0E-6;
+    var h1=1; var h2=0;
+    var k1=0; var k2=1;
+    var b = this;
+    do {
+        var a = Math.floor(b);
+        var aux = h1; h1 = a*h1+h2; h2 = aux;
+        aux = k1; k1 = a*k1+k2; k2 = aux;
+        b = 1/(b-a);
+    } while (Math.abs(this-h1/k1) > this*tolerance);
+
+    if (k1 > 1) {
+      if (proper && h1 >= k1) {
+        return Math.floor(this)+' '+(h1-(Math.floor(this)*k1))+'/'+k1;
+      } else {
+        return h1+"/"+k1;
+      }
+    } else {
+      return h1;
+    }
 };
 
 Number.prototype.pad = function(width, c) {

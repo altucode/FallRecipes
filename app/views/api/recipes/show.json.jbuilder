@@ -6,9 +6,7 @@ json.author do
   json.avatar asset_path(@recipe.user.avatar.url)
 end
 
-if (user_logged_in? && current_user.id == @recipe.user_id)
-  json.editable true
-end
+json.editable (user_logged_in? && current_user.id == @recipe.user_id)
 
 json.first_photo @recipe.first_photo_url
 

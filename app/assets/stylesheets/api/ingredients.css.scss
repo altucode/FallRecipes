@@ -1,3 +1,49 @@
 // Place all the styles related to the api/ingredients controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.ingredient {
+  display: inline-block;
+  width: 49%;
+  height: 20px;
+}
+
+.ingredient > * {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  border: none;
+  height: 100%;
+}
+
+.ingredient > input.input {
+  border-bottom: 1px solid black;
+}
+
+li.ingredient > *:nth-child(n+2) {
+  width: 50px;
+}
+
+li.ingredient > *:nth-child(n+4) {
+  width: 80px;
+}
+
+li.ingredient > *:nth-child(n+6) {
+  width: 130px;
+}
+
+.fraction > .top {
+  font-size: 0.6em;
+  vertical-align: super;
+}
+
+.fraction > .bot {
+  font-size: 0.6em;
+  margin-left: -4px;
+}
+
+.fraction > .bot:before {
+  content: '\2044';
+  font-size: 2em;
+}

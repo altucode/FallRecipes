@@ -1,7 +1,7 @@
 FallRecipes.Views.RecipeShow = Backbone.View.extend({
-  template: JST["recipes/recipe"],
+  template: JST["recipes/form"],
   className: function() {
-    return 'recipe' + (this.model.get('editable') ? 'editable' : '');
+    return 'recipe' + FallRecipes.View.prototype.className.call(this);
   },
   events: {
     "submit .editable .ingredient-form": "addIngredient",

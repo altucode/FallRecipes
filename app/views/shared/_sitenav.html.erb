@@ -4,13 +4,13 @@
   </a>
   <menu>
     <menuitem>
-      <form class="search" action="#/recipes/search" method="GET">
-        <input class="search-box" name="q"></input>
+      <form class="search" action="<%= root_url %>#/recipes/search" method="GET">
+        <input class="search-box" name="q" placeholder="search"></input>
         <button class="search">&#9906</button>
       </form>
     </menuitem>
     <menuitem>
-      <a href="#/recipes/1">
+      <a href="<%= root_url %>#/recipes/1">
         recipes
       </a>
     </menuitem>

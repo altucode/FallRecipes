@@ -1,2 +1,35 @@
 <input type="checkbox">
-<%= model.escape('unit_qty') %> <%= model.escape('unit')%> <%= model.escape('name') %>
+<input class="input"
+  name="unit_qty"
+  placeholder="ex: 1/2"
+  pattern="^\d+(?:\/\d+)*$"
+  value="<%= parseFloat(model.escape('unit_qty')).toRat() %>">
+<label class="display">
+  <% var a = parseFloat(model.escape('unit_qty')).toRat(true).toString().split(' '); %>
+  <%= a.length > 1 ? a.shift() : '' %>
+  <% if (a.length > 0) { %>
+    <% a = a[0].split(/\//); %>
+    <% if (a.length > 1 ) { %>
+    <span class="fraction">
+      <span class="top"><%= a[0] %></span>
+      <span class="bot"><%= a[1] %></span>
+    </span>
+    <% } else { %>
+      <%= a[0] %>
+    <% } %>
+  <% } %>
+</label>
+<select class="input" name="unit">
+  <% units.forEach(function (unit) { %>
+    <option <%= model.get('unit') === unit ? 'selected' : '' %> >
+      <%= unit %>
+    </option>
+  <% }); %>
+</select>
+<label class="display"><%= model.escape('unit')%></label>
+<input
+  class="input"
+  name="name"
+  minlength=2
+  value="<%= model.escape('name') %>">
+<label class="display"><%= model.escape('name') %></label>

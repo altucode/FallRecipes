@@ -1,6 +1,4 @@
-<% if flash[:errors] %>
-  <%= flash[:errors] %>
-<% end %>
+
 
 <form action="<%= users_url %>" method="POST">
   <input
@@ -8,24 +6,30 @@
     type="hidden"
     value="<%= form_authenticity_token %>">
   <label>
-    Username
+    Username<small>
+      (This is the unique name used to personally identify you)
+    </small><br>
     <input name="user[username]" value="<%= @user.username %>">
-  </label>
+  </label><br>
   <label>
-    Password
+    Display Name<small>
+      (This is the name that will generally be shown to other users)
+    </small><br>
+    <input name="user[display_name]" value="<%= @user.display_name %>">
+  </label><br>
+  <label>
+    Password<br>
     <input name="user[password]" type="password">
-  </label>
+  </label><br>
   <label>
-    First Name
-    <input name="user[first_name]" value="<%= @user.first_name %>">
-  </label>
-  <label>
-    Last Name
-    <input name="user[last_name]" value="<%= @user.last_name %>">
-  </label>
-  <label>
-    Email
+    Email<br>
     <input name="user[email]" value="<%= @user.email %>">
-  </label>
+  </label><br>
   <button>Register</button>
 </form>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <label class="errors"><%= error %></label><br>
+  <% end %>
+<% end %>

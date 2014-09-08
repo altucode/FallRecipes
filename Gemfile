@@ -16,7 +16,6 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'rails_serve_static_assets'
 gem 'rails_stdout_logging'
-gem 'oauth'
 gem 'addressable'
 gem 'rest-client'
 gem 'aws-sdk'

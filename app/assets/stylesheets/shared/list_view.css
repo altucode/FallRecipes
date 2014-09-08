@@ -1,0 +1,25 @@
+div > .add {
+  display: none;
+}
+
+.editable div > .add {
+  display: block;
+}
+
+ul > li > .display {
+  display: auto;
+}
+
+ul > li > .input {
+  display: none;
+}
+
+.editable ul > li > .input:nth-child(n):focus + .display,
+.editable ul > li:hover > .display {
+  display: none;
+}
+
+.editable ul > li > .input:focus,
+.editable ul > li:hover > .input {
+  display: inline;
+}
