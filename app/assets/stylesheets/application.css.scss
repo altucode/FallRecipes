@@ -19,6 +19,7 @@
 
 * {
   font-family: inherit;
+  font-size: inherit;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -47,7 +48,7 @@ body {
   width: 900px;
   background: $body-background;
   min-height: 100%;
-  box-shadow: 0px 0px 1em lightgray;
+  box-shadow: 0px 0px 1em rgba(0, 0, 0, 0.2);
 }
 
 #page {

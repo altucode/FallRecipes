@@ -4,28 +4,40 @@
   </div>
   <a class="save">Save</a>
   <div class="recipe-info">
-    <h2><%= recipe.escape('name').toTitleCase() %></h2>
+    <h2>
+      <input
+        class="input edit"
+        name="name"
+        type="text"
+        value="<%= recipe.escape('name').toTitleCase()%>">
+      <label class="display"><%= recipe.escape('name').toTitleCase() %></label>
+    </h2>
     <meter class="score" value="<%= recipe.escape('score') %>"></meter>
-    <div id="reviews" class="expander modal">
-      <label class="link" for="review-expander">
-        Reviews (<%= recipe.reviews().length %>)
-      </label>
-      <input id="review-expander" type="checkbox">
-      <div class="content window">
-        <menu class="toolbar">
-          <menuitem>
-            <label for="review-expander">&#10005</button>
-          </menuitem>
-        </menu>
-      </div>
-    </div>
     <div class="recipe-desc">
-      <img class="thumb" src="<%= recipe.author ? recipe.author.avatar : null %>"></img>
-      Recipe by
-      <a href="#users/<%= recipe.author ? recipe.author.id : null %>">
-        <%= recipe.author ? recipe.author.name : null %>
-      </a>
-      <p>"<%= recipe.escape('desc') %>"</p>
+      <div class="desc-header">
+        <div id="reviews" class="expander modal">
+          <label class="link" for="review-expander">
+            Reviews (<%= recipe.reviews().length %>)
+          </label>
+          <input id="review-expander" type="checkbox">
+          <div class="content window">
+            <menu class="toolbar">
+              <menuitem>
+                <label for="review-expander">&#10005</button>
+              </menuitem>
+            </menu>
+          </div>
+        </div>
+        <img class="thumb"
+        src="<%= recipe.author ? recipe.author.avatar : null %>"></img>
+
+        Recipe by
+        <a href="#users/<%= recipe.author ? recipe.author.id : null %>">
+          <%= recipe.author ? recipe.author.name : null %>
+        </a>
+     </div>
+      <textarea name="desc" class="input edit"><%= recipe.escape('desc') %></textarea>
+      <p class="display">"<%= recipe.escape('desc') %>"</p>
     </div>
   </div>
 </div>
@@ -44,7 +56,7 @@
   </menuitem>
 </menu>
 <div class="ingredient-box">
-  <label> Ingredients <small>(<%= recipe.escape('servings') %> servings)</small> </label>
+  <h4> Ingredients <small>(<%= recipe.escape('servings') %> servings)</small> </h4>
 </div>
 <ul class="time-box">
   <li>
@@ -78,6 +90,9 @@
 </div>
 
 <div class="nutrition-box">
+  <a class="attribution" href="http://platform.fatsecret.com">
+  <img src="http://platform.fatsecret.com/api/static/images/fatsecret_platform_120_17.gif" border="0">
+  </a>
   <h4> Nutrition (per serving) </h4>
   <ul>
     <% Object.keys(recipe.nutrition()).forEach(function (nf) { %>

@@ -2,13 +2,11 @@ FallRecipes.Collection = Backbone.Collection.extend({
 
   initialize: function (models, options) {
     this.url = options.url;
-    if (options.delayUpdate) {
-    }
   },
 
   update: function() {
     this.forEach(function(model) {
-      model.update(true);
+      model.update();
     });
   },
 

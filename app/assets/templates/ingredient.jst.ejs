@@ -1,6 +1,8 @@
 <input type="checkbox">
-<input class="input"
+<input
+  class="input edit"
   name="unit_qty"
+  type="text"
   placeholder="ex: 1/2"
   pattern="^\d+(?:\/\d+)*$"
   value="<%= parseFloat(model.escape('unit_qty')).toRat() %>">
@@ -19,7 +21,7 @@
     <% } %>
   <% } %>
 </label>
-<select class="input" name="unit">
+<select class="input edit" name="unit">
   <% units.forEach(function (unit) { %>
     <option <%= model.get('unit') === unit ? 'selected' : '' %> >
       <%= unit %>
@@ -28,8 +30,10 @@
 </select>
 <label class="display"><%= model.escape('unit')%></label>
 <input
-  class="input"
+  class="input edit"
   name="name"
+  type="text"
   minlength=2
   value="<%= model.escape('name') %>">
 <label class="display"><%= model.escape('name') %></label>
+<a class="delete edit">X</a>

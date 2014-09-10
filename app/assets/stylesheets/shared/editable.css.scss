@@ -1,0 +1,28 @@
+.edit,
+.editable .input.edit:focus + .display,
+.editable *:hover > .display {
+  display: none;
+}
+
+.display,
+.editable .edit:not(.input),
+.editable .input.edit:focus,
+.editable *:hover > .input.edit {
+  display: inherit;
+}
+
+.editable input[type="text"].input.edit {
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  border-bottom: 1px solid black;
+}
+
+.editable textarea.input.edit {
+  min-height: 20px;
+  height: 100%;
+  width: 100%;
+}

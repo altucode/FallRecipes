@@ -1,4 +1,9 @@
-FallRecipes.Models.Recipe = Backbone.Model.extend({
+FallRecipes.Models.Recipe = FallRecipes.Model.extend({
+  defaults: {
+    'name': 'New Recipe',
+    'prep_time': 0,
+    'cook_time': 0
+  },
   name: 'recipe',
   urlRoot: 'api/recipes',
   parse: function (response) {
@@ -29,15 +34,15 @@ FallRecipes.Models.Recipe = Backbone.Model.extend({
     }
     return response;
   },
-  saveChanges: function() {
-    this.ingredients().forEach(function(model) { if (model.get('changed')) {model.save();} });
-    this.directions().forEach(function(model) { if (model.get('changed')) {model.save();} });
-    Backbone.Model.prototype.save.call(this);
+  update: function() {
+    this.ingredients().update();
+    this.directions().update();
+    FallRecipes.Model.prototype.save.call(this);
   },
   photos: function() {
     return this._photos ||
       (this._photos = new FallRecipes.Collection({}, {
-        model: FallRecipes.Models.Model,
+        model: FallRecipes.Model,
         url: 'api/photos'
       }));
   },
@@ -54,14 +59,14 @@ FallRecipes.Models.Recipe = Backbone.Model.extend({
   directions: function() {
     return this._directions ||
       (this._directions = new FallRecipes.Collection({}, {
-        model: FallRecipes.Models.Model,
+        model: FallRecipes.Model,
         url: 'api/directions'
       }));
   },
   reviews: function() {
     return this._reviews ||
       (this._reviews = new FallRecipes.Collection({}, {
-        model: FallRecipes.Models.Model,
+        model: FallRecipes.Model,
         url: 'api/reviews'
       }));
   },
@@ -73,6 +78,7 @@ FallRecipes.Models.Recipe = Backbone.Model.extend({
     case 'sodium':
     case 'potassium':
     case 'cholesterol': return 'mg';
+    case 'calories': return '';
     default: return 'g';
     }
   },
@@ -87,7 +93,7 @@ FallRecipes.Models.Recipe = Backbone.Model.extend({
 });
 
 FallRecipes.Models.Recipe.DAILY_VALUES = {
-  calories: 2000,
+  calories: 2200,
   fat: 65,
   saturated_fat: 20,
   cholesterol: 300,

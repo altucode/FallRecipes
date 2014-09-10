@@ -6,8 +6,7 @@ module Subscribable
     has_many :subscribers, through: :subs, source_type: "User"
   end
 
-  def notify(event_id, notifiable)
-    notifiable ||= self
+  def notify(event_id, notifiable = self)
     self.subscribers.each do |subscriber|
       subscriber.notifications.create(notifiable: notifiable, event_id: event_id)
     end

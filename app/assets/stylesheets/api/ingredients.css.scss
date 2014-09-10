@@ -10,27 +10,25 @@
 }
 
 .ingredient > * {
-  display: inline-block;
   padding: 0;
   margin: 0;
   border: none;
   height: 100%;
 }
 
-.ingredient > input.input {
-  border-bottom: 1px solid black;
+li.ingredient > .display:nth-child(n+2),
+li.ingredient > .input:nth-child(n+2) {
+  width: 35px;
 }
 
-li.ingredient > *:nth-child(n+2) {
-  width: 50px;
+li.ingredient > .display:nth-child(n+4),
+li.ingredient > .input:nth-child(n+4) {
+  width: 60px;
 }
 
-li.ingredient > *:nth-child(n+4) {
-  width: 80px;
-}
-
-li.ingredient > *:nth-child(n+6) {
-  width: 130px;
+li.ingredient > .display:nth-child(n+6),
+li.ingredient > .input:nth-child(n+6) {
+  width: 150px;
 }
 
 .fraction > .top {

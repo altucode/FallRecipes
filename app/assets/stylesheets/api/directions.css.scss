@@ -11,13 +11,36 @@
 }
 
 .directions-box ul li {
-  margin: 10px;
+  padding: 10px;
 }
 
-.directions-box ul > li textarea {
-  border: 1px solid $content-line-soft;
+.directions-box ul > li > div {
+  position: relative;
+  display: block;
+  min-height: 20px;
+  height: 100%;
+}
+
+.editable .directions-box li div:hover p,
+.editable .directions-box li div textarea.input.edit:focus + p {
+  display: block;
+  visibility: hidden;
+}
+
+.editable .directions-box ul > li textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
   width: 100%;
-  margin-left: 10px;
-  min-height: 50px;
+  border: 1px solid $content-line-soft;
   font-size: 14px;
+}
+
+.directions-box ul > li a {
+  position: absolute;
+  top: 0;
+  right: -15px;
 }

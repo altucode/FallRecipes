@@ -12,14 +12,26 @@ window.FallRecipes = {
 };
 
 FallRecipes.Model = Backbone.Model.extend({
-  initialize: function(options) {
-    if (options.delayUpdate) {
+  initialize: function(attrs, options) {
+    if (attrs.delayUpdate) {
       var model = this;
       this.listenTo(this, 'add change remove', function() { model.changed = true; });
     }
   },
+  trash: function() {
+    this.set('trash', true);
+  },
+  set: function(attrs, options) {
+    this.dirty = true;
+    Backbone.Model.prototype.set.call(this, attrs, options);
+  },
   update: function() {
-
+    if (this.get('trash')) {
+      this.destroy();
+    } else if (this.dirty) {
+      Backbone.Model.prototype.save.call(this);
+      delete this.dirty;
+    }
   }
 });
 

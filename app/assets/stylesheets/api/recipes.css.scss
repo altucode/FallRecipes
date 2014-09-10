@@ -11,12 +11,16 @@
 
 .recipe > .summary-box {
   display: block;
+  position: relative;
   border: 1px solid transparent;
   min-height: 280px;
 }
 
 .recipe > .summary-box > .recipe-info {
-  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 270px;
 }
 
 .recipe > .summary-box > .recipe-info > meter {
@@ -151,8 +155,13 @@
   color: $link-color;
 }
 
+.nutrition-box .attribution {
+  float: right;
+}
+
 .nutrition-box ul {
   width: 100%;
+  margin-top: 10px;
 }
 
 .nutrition-box li {

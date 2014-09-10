@@ -1,6 +1,7 @@
-<textarea name="body" class="input">
-  <%= model.escape('body') %>
-</textarea>
-<p class="display">
-  <%= model.escape('body') %>
-</p>
+<div>
+  <textarea name="body" class="input edit"><%= model.escape('body') %></textarea>
+  <p class="display">
+    <%= model.escape('body') %>
+  </p>
+<a class="delete edit">X</a>
+</div>

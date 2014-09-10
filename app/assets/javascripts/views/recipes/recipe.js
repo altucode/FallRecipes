@@ -2,7 +2,8 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
   template: JST["recipes/recipe"],
   className: 'recipe',
   events: {
-    'click .save': 'saveChanges'
+    'blur .input': 'updateAttrs',
+    'click .save': 'update'
   },
   initialize: function () {
     this.listenTo(this.model, "add remove change", this.render);
@@ -16,21 +17,20 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
     this.$el.children('.ingredient-box').append(this.ingredientView().render().$el);
     this.$el.children('.directions-box').append(this.directionView().render().$el);
     this.$el.find('.expander .content').append(this.reviewView().render().$el);
-    //this.$el.find('.photo-frame').append(this.photoView().render().$el);
+    this.$el.find('.photo-frame').append(this.photoView().render().$el);
 
     this.delegateEvents();
 
     return this;
   },
-  saveChanges: function(event) {
-    console.log("SAVE");
-    this.model.saveChanges();
+  update: function(event) {
+    this.model.update();
   },
   photoView: function() {
     return this._photoView ||
     (this._photoView = new FallRecipes.Views.Carousel({
       itemTemplate: JST['photo'],
-      items: this.model.photos()
+      collection: this.model.photos()
     }));
   },
   ingredientView: function() {
@@ -39,6 +39,7 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
         itemAttrs: {
           recipe_id: this.model.id
         },
+        editable: true,
         itemView: FallRecipes.Views.Ingredient,
         collection: this.model.ingredients()
       }));
@@ -47,8 +48,10 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
     return this._directionView ||
       (this._directionView = new FallRecipes.Views.ListView({
         itemAttrs: {
-          recipe_id: this.model.id
+          recipe_id: this.model.id,
+          body: '-Placeholder-'
         },
+        editable: true,
         itemTemplate: JST['direction'],
         itemClass: 'direction',
         collection: this.model.directions()
@@ -62,7 +65,13 @@ FallRecipes.Views.RecipeShow = Backbone.View.extend({
         collection: this.model.reviews()
       }));
 
-  }
+  },
+  updateAttrs: function (event) {
+    event.preventDefault();
+    var hash = {};
+    hash[$(event.target).attr('name')] = $(event.target).val();
+    this.model.set(hash);
+  },
 
 
   // ,

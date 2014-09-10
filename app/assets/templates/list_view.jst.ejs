@@ -1,4 +1,8 @@
-<a class="add">+new</a>
+<a id="add" class="edit">+new</a>
+<% if (editable) { %>
+  |
+  <a id="clear" class="edit">clear</a>
+<% } %>
 <% if (header) { %>
   <h4><%= header %></h4>
 <% } %>

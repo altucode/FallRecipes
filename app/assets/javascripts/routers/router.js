@@ -27,7 +27,6 @@ FallRecipes.Routers.Router = Backbone.Router.extend({
 
   recipeNew: function() {
     var recipe = new FallRecipes.Models.Recipe({ editable: true });
-    this.recipes().push(recipe);
     var newView = new FallRecipes.Views.RecipeShow({ model: recipe });
     this._swapView(newView);
   },

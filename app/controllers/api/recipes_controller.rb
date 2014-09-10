@@ -36,7 +36,7 @@ class Api::RecipesController < ApplicationController
 
     if @recipe.update_attributes(recipe_params)
       @recipe.update_nutrition!
-      @recipe.notify(Recipe::UPDATED, @recipe)
+      @recipe.notify(Recipe::UPDATED)
       render :show
     else
       render json: @recipe.errors.full_messages, status: :unprocessable_entity
