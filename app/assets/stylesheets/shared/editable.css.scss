@@ -1,3 +1,5 @@
+@import 'colors';
+
 .edit,
 .editable .input.edit:focus + .display,
 .editable *:hover > .display {
@@ -9,6 +11,11 @@
 .editable .input.edit:focus,
 .editable *:hover > .input.edit {
   display: inherit;
+}
+
+.editable label.display {
+  border-bottom: 1px dotted black;
+  vertical-align: bottom;
 }
 
 .editable input[type="text"].input.edit {
@@ -25,4 +32,5 @@
   min-height: 20px;
   height: 100%;
   width: 100%;
+  border: 1px solid $content-line-strong;
 }

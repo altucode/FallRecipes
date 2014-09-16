@@ -23,17 +23,21 @@
   left: 270px;
 }
 
+.recipe-info > h2 {
+  margin-right: 40px;
+}
+
 .recipe > .summary-box > .recipe-info > meter {
   width: 200px;
   display: inline-block;
 }
 
-.recipe > .summary-box > .save {
+.recipe > .summary-box  .save {
   display: none;
   float: right;
 }
 
-.editable .summary-box > .save {
+.editable .summary-box  .save {
   display: inline-block;
   float: right;
 }
@@ -122,7 +126,7 @@
 .time-box {
   position: static;
   list-style: none;
-  width: 350px;
+  width: 500px;
   border-top: 1px solid $content-line-soft;
   border-bottom: 1px solid $content-line-soft;
 }
@@ -133,9 +137,10 @@
 
 .time-box li {
   width: 32%;
+  height: 45px;
   display: inline-block;
   border-left: 1px solid $content-line-soft;
-  padding: 0px 20px 10px 20px;
+  padding: 0px 10px 10px 10px;
   margin: 10px 0px 10px 0px;
   text-align: center;
   color: $static-text-color;
@@ -148,11 +153,19 @@
   font-family: serif;
   color: $header-color;
   font-size: 20px;
+  width: 20px;
 }
 
 
 .time-box .ready-in span {
   color: $link-color;
+}
+
+.time-box label.display,
+.time-box input {
+  padding: 0;
+  margin: 0;
+  width: 18px;
 }
 
 .nutrition-box .attribution {

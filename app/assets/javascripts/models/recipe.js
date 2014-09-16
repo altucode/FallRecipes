@@ -41,14 +41,14 @@ FallRecipes.Models.Recipe = FallRecipes.Model.extend({
   },
   photos: function() {
     return this._photos ||
-      (this._photos = new FallRecipes.Collection({}, {
+      (this._photos = new FallRecipes.Collection([], {
         model: FallRecipes.Model,
         url: 'api/photos'
       }));
   },
   ingredients: function() {
     return this._ingredients ||
-      (this._ingredients = new FallRecipes.Collection({}, {
+      (this._ingredients = new FallRecipes.Collection([], {
         model: FallRecipes.Models.Ingredient,
         url: 'api/ingredients'
       }));
@@ -58,17 +58,33 @@ FallRecipes.Models.Recipe = FallRecipes.Model.extend({
   },
   directions: function() {
     return this._directions ||
-      (this._directions = new FallRecipes.Collection({}, {
+      (this._directions = new FallRecipes.Collection([], {
         model: FallRecipes.Model,
         url: 'api/directions'
       }));
   },
   reviews: function() {
     return this._reviews ||
-      (this._reviews = new FallRecipes.Collection({}, {
+      (this._reviews = new FallRecipes.Collection([], {
         model: FallRecipes.Model,
         url: 'api/reviews'
       }));
+  },
+  set: function(attrs, options) {
+    if (attrs.hasOwnProperty('prep_time_hr')) {
+      attrs.prep_time = this.get('prep_time');
+      attrs.prep_time = attrs.prep_time % 3600 + parseInt(attrs.prep_time_hr) * 3600;
+    } else if (attrs.hasOwnProperty('prep_time_min')) {
+      attrs.prep_time = this.get('prep_time');
+      attrs.prep_time += (parseInt(attrs.prep_time_min) * 60) - attrs.prep_time % 3600;
+    } else if (attrs.hasOwnProperty('cook_time_hr')) {
+      attrs.cook_time = this.get('cook_time');
+      attrs.cook_time = attrs.cook_time % 3600 + parseInt(attrs.cook_time_hr) * 3600;
+    } else if (attrs.hasOwnProperty('cook_time_min')) {
+      attrs.cook_time = this.get('cook_time');
+      attrs.cook_time += (parseInt(attrs.cook_time_min) * 60) - attrs.cook_time % 3600;
+    }
+    return FallRecipes.Model.prototype.set.call(this, attrs, options);
   },
   getDailyPercent: function(key) {
     return this.nutrition()[key] / FallRecipes.Models.Recipe.DAILY_VALUES[key];

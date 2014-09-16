@@ -2,8 +2,8 @@
   <div class="photo-frame">
     <img class="photo" src="<%= recipe.escape('first_photo') %>"></img>
   </div>
-  <a class="save">Save</a>
   <div class="recipe-info">
+    <a class="save">Save</a>
     <h2>
       <input
         class="input edit"
@@ -61,17 +61,57 @@
 <ul class="time-box">
   <li>
     <h5>Prep</h5>
-    <% if (recipe.escape('prep_time') >= 3600) {%>
-      <span class="num"><%= recipe.escape('prep_time') / 3600 %></span>hr
+    <% if (recipe.get('editable') || (recipe.escape('prep_time') >= 3600)) {%>
+      <span class="num">
+        <input
+          name="prep_time_hr"
+          type="text"
+          pattern="\d+"
+          class="input edit"
+          value="<%= Math.floor(recipe.escape('prep_time') / 3600) %>">
+        <label class="display">
+          <%= Math.floor(recipe.escape('prep_time') / 3600) %>
+        </label>
+      </span>hr
     <% } %>
-    <span class="num"><%= recipe.escape('prep_time') / 60 % 60 %></span>min
+    <span class="num">
+      <input
+        name="prep_time_min"
+        type="text"
+        pattern="\d+"
+        class="input edit"
+        value="<%= recipe.escape('prep_time') / 60 % 60 %>">
+      <label class="display">
+        <%= recipe.escape('prep_time') / 60 % 60 %>
+      </label>
+    </span>min
   </li>
   <li>
     <h5>Cook</h5>
-    <% if (recipe.escape('cook_time') >= 3600) {%>
-      <span class="num"><%= recipe.escape('cook_time') / 3600 %></span>hr
+    <% if (recipe.get('editable') || (recipe.escape('cook_time') >= 3600)) {%>
+      <span class="num">
+        <input
+          name="cook_time_hr"
+          type="text"
+          pattern="\d+"
+          class="input edit"
+          value="<%= Math.floor(recipe.escape('cook_time') / 3600) %>">
+        <label class="display">
+          <%= Math.floor(recipe.escape('cook_time') / 3600) %>
+        </label>
+      </span>hr
     <% } %>
-    <span class="num"><%= recipe.escape('cook_time') / 60 % 60 %></span>min
+    <span class="num">
+      <input
+        name="cook_time_min"
+        type="text"
+        pattern="\d+"
+        class="input edit"
+        value="<%= recipe.escape('cook_time') / 60 % 60 %>">
+      <label class="display">
+        <%= recipe.escape('cook_time') / 60 % 60 %>
+      </label>
+    </span>min
   </li>
   <li class="ready-in">
     <h5>Ready In</h5>
