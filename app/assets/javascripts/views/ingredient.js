@@ -1,17 +1,12 @@
-FallRecipes.Views.Ingredient = Backbone.View.extend({
+FallRecipes.Views.Ingredient = FallRecipes.View.extend({
   tagName: "li",
-  className: "ingredient",
+  _className: "ingredient",
   template: JST['ingredient'],
-  initialize: function(options) {
-    this.$el.attr('data-index', options.index);
+  _templateData: {
+    'units'
   },
-  render: function() {
-    var content = this.template({ model: this.model, units: FallRecipes.Views.Ingredient.UNITS });
-    this.$el.html(content);
-
-    this.delegateEvents();
-
-    return this;
+  units: function() {
+    return FallRecipes.Views.Ingredient.UNITS;
   }
 });
 

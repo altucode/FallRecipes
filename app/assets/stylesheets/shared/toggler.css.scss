@@ -1,0 +1,42 @@
+.toggler {
+  position: relative;
+}
+
+.toggler > input[type=checkbox],
+.toggler > input[type=checkbox]:checked ~ .off,
+.toggler > input[type=checkbox]:checked ~ *:not(.on):not(.off) .off,
+.toggler > input[type=checkbox]:not(:checked) ~ .on,
+.toggler > input[type=checkbox]:not(:checked) ~ *:not(.on):not(.off) .on {
+  display: none;
+}
+
+.toggler > .popup {
+  position: absolute;
+}
+
+.toggler > .modal {
+  position: fixed;
+}
+
+.toggler > input[type=checkbox] + label.arrow,
+.toggler > input[type=checkbox] + * > label.arrow {
+  display: inline-block;
+  color: gray;
+  line-height: 9px;
+  border: 2px solid gray;
+  border-radius: 9px;
+  padding: 2px 1px 0 1px;
+  cursor: pointer;
+}
+
+.toggler > input[type=checkbox]:checked + label.arrow,
+.toggler > input[type=checkbox]:checked + * > label.arrow {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+}
+
+.toggler label.arrow:after {
+  font-size: 18px;
+  content: "◂";
+}

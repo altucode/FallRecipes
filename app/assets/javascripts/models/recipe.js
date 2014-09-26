@@ -4,71 +4,37 @@ FallRecipes.Models.Recipe = FallRecipes.Model.extend({
     'prep_time': 0,
     'cook_time': 0
   },
+  objects: {
+    author: {
+      type: Object,
+    },
+    directions: {
+      type: FallRecipes.Collection,
+      props: { url: 'api/directions' }
+    },
+    ingredients: {
+      type: FallRecipes.Collection,
+      model: FallRecipes.Models.Ingredient,
+      props: { url: 'api/ingredients' }
+    },
+    nutrition: {
+      type: Object
+    },
+    photos: {
+      type: FallRecipes.Collection,
+      props: { url: 'api/photos' }
+    },
+    reviews: {
+      type: FallRecipes.Collection,
+      props: { url: 'api/reviews' }
+    }
+  },
   name: 'recipe',
   urlRoot: 'api/recipes',
-  parse: function (response) {
-    response.created_at = new Date(response.created_at);
-    if (response.author) {
-      this.author = response.author;
-      delete response.author;
-    }
-    if (response.photos) {
-      this.photos().set(response.photos, { parse: true });
-      delete response.photos;
-    }
-    if (response.nutrition) {
-      this._nutrition = response.nutrition;
-      delete response.nutrition;
-    }
-    if (response.ingredients){
-      this.ingredients().set(response.ingredients, { parse: true });
-      delete response.ingredients;
-    }
-    if (response.directions) {
-      this.directions().set(response.directions, { parse: true });
-      delete response.recipe_steps;
-    }
-    if (response.reviews) {
-      this.reviews().set(response.reviews, { parse: true });
-      delete response.reviews;
-    }
-    return response;
-  },
   update: function() {
     this.ingredients().update();
     this.directions().update();
     this.save();
-  },
-  photos: function() {
-    return this._photos ||
-      (this._photos = new FallRecipes.Collection([], {
-        model: FallRecipes.Model,
-        url: 'api/photos'
-      }));
-  },
-  ingredients: function() {
-    return this._ingredients ||
-      (this._ingredients = new FallRecipes.Collection([], {
-        model: FallRecipes.Models.Ingredient,
-        url: 'api/ingredients'
-      }));
-  },
-  nutrition: function() {
-    return this._nutrition || (this._nutrition = {});
-  },
-  directions: function() {
-    return this._directions ||
-      (this._directions = new FallRecipes.Collection([], {
-        model: FallRecipes.Model,
-        url: 'api/directions'
-      }));
-  },
-  reviews: function() {
-    return this._reviews ||
-      (this._reviews = new FallRecipes.Collection([], {
-        model: FallRecipes.Model,
-        url: 'api/reviews'
-      }));
   },
   set: function(attrs, options) {
     if (attrs.hasOwnProperty('prep_time_hr')) {
