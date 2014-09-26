@@ -37,7 +37,7 @@ FallRecipes.Models.Recipe = FallRecipes.Model.extend({
   update: function() {
     this.ingredients().update();
     this.directions().update();
-    FallRecipes.Model.prototype.save.call(this);
+    this.save();
   },
   photos: function() {
     return this._photos ||

@@ -8,7 +8,7 @@ end
 
 json.editable (user_logged_in? && current_user.id == @recipe.user_id)
 
-json.first_photo @recipe.first_photo_url
+json.first_photo asset_path(@recipe.first_photo_url)
 
 json.photos @recipe.photos do |photo|
   json.extract! photo, :id, :user_id, :caption

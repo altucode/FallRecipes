@@ -9,7 +9,7 @@ div.summary-box {
 </style>
 
 <div class="summary-box">
-  <img class="photo" src="<%= asset_path(@recipe.image.url(:medium)) %>"></img>
+  <img class="photo" src="<%= asset_path(@recipe.first_photo_url) %>"></img>
   <h1><%= @recipe.name %></h1>
   Score: <%= @recipe.score %>
   <meter class="score" value="<%= @recipe.score %>"></meter>
